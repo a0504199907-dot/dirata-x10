@@ -1,0 +1,1105 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="דירתא - הפלטפורמה החכמה לחיפוש ופרסום דירות בקהילה החרדית. מצאו את הדירה הבאה שלכם בקלות ובמהירות.">
+<title>דירתא | הדירה הבאה שלך מחכה לך</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy: #0d1f3c;
+  --navy-mid: #1a2e5a;
+  --teal: #2ec4b6;
+  --teal-dark: #21a699;
+  --gold: #f4a142;
+  --gold-dark: #e8931e;
+  --cream: #f8f6f2;
+  --white: #ffffff;
+  --gray-light: #f0f4f8;
+  --gray-mid: #e2e8f0;
+  --gray: #94a3b8;
+  --text-dark: #0d1f3c;
+  --text-mid: #334155;
+  --text-light: #64748b;
+  --radius: 16px;
+  --radius-lg: 24px;
+  --shadow: 0 4px 24px rgba(13,31,60,0.08);
+  --shadow-lg: 0 20px 60px rgba(13,31,60,0.15);
+  --transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:'Assistant',sans-serif;direction:rtl;color:var(--text-dark);overflow-x:hidden;line-height:1.6;background:var(--white);}
+a{text-decoration:none;color:inherit;}
+img{max-width:100%;height:auto;}
+.container{max-width:1200px;margin:0 auto;padding:0 24px;}
+.btn-primary{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,var(--teal),var(--teal-dark));color:var(--white);padding:14px 32px;border-radius:50px;font-size:17px;font-weight:700;border:none;cursor:pointer;transition:var(--transition);box-shadow:0 4px 20px rgba(46,196,182,0.4);}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(46,196,182,0.5);}
+.btn-secondary{display:inline-flex;align-items:center;gap:8px;background:transparent;color:var(--navy-mid);padding:13px 28px;border-radius:50px;font-size:16px;font-weight:600;border:2px solid var(--navy-mid);cursor:pointer;transition:var(--transition);}
+.btn-secondary:hover{background:var(--navy-mid);color:var(--white);}
+.btn-gold{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,var(--gold),var(--gold-dark));color:var(--white);padding:16px 36px;border-radius:50px;font-size:18px;font-weight:800;border:none;cursor:pointer;transition:var(--transition);box-shadow:0 4px 20px rgba(244,161,66,0.4);}
+.btn-gold:hover{transform:translateY(-3px);box-shadow:0 12px 40px rgba(244,161,66,0.5);}
+.section-tag{display:inline-block;background:linear-gradient(135deg,rgba(46,196,182,0.12),rgba(46,196,182,0.06));color:var(--teal-dark);padding:6px 18px;border-radius:50px;font-size:14px;font-weight:700;letter-spacing:0.5px;border:1px solid rgba(46,196,182,0.25);margin-bottom:16px;}
+.section-title{font-size:clamp(28px,4vw,48px);font-weight:900;line-height:1.15;color:var(--navy);}
+.section-title span{background:linear-gradient(135deg,var(--teal),var(--teal-dark));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.section-subtitle{font-size:18px;color:var(--text-light);font-weight:400;max-width:600px;line-height:1.7;}
+</style><style>
+/* NAVBAR */
+.navbar{position:fixed;top:0;left:0;right:0;z-index:1000;transition:var(--transition);}
+.navbar-inner{display:flex;align-items:center;justify-content:space-between;padding:18px 40px;transition:var(--transition);}
+.navbar.scrolled .navbar-inner{background:rgba(255,255,255,0.96);backdrop-filter:blur(20px);padding:12px 40px;box-shadow:0 2px 20px rgba(13,31,60,0.08);}
+.navbar-logo{display:flex;align-items:center;gap:10px;cursor:pointer;}
+.logo-icon{width:44px;height:44px;background:linear-gradient(135deg,var(--teal),var(--navy-mid));border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:900;color:white;}
+.logo-text{font-size:26px;font-weight:900;color:var(--navy);}
+.logo-text span{color:var(--teal);}
+.navbar-links{display:flex;align-items:center;gap:8px;}
+.navbar-links a{padding:8px 16px;border-radius:50px;font-size:15px;font-weight:600;color:var(--text-mid);transition:var(--transition);}
+.navbar-links a:hover{color:var(--navy);background:rgba(46,196,182,0.1);}
+.navbar-actions{display:flex;align-items:center;gap:12px;}
+.nav-btn-outline{padding:9px 20px;border-radius:50px;border:2px solid var(--navy-mid);color:var(--navy-mid);font-size:14px;font-weight:700;cursor:pointer;transition:var(--transition);background:transparent;}
+.nav-btn-outline:hover{background:var(--navy-mid);color:white;}
+.nav-btn-primary{padding:10px 22px;border-radius:50px;background:linear-gradient(135deg,var(--teal),var(--teal-dark));color:white;font-size:14px;font-weight:700;cursor:pointer;transition:var(--transition);border:none;box-shadow:0 3px 15px rgba(46,196,182,0.35);}
+.nav-btn-primary:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(46,196,182,0.45);}
+/* HERO */
+.hero{min-height:100vh;background:linear-gradient(160deg,#0d1f3c 0%,#1a3a6b 40%,#0d3353 70%,#0a2040 100%);position:relative;display:flex;align-items:center;overflow:hidden;}
+.hero::before{content:'';position:absolute;inset:0;background:url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 900"><defs><radialGradient id="g1" cx="30%" cy="40%"><stop offset="0%" stop-color="%232ec4b6" stop-opacity="0.15"/><stop offset="100%" stop-color="transparent"/></radialGradient><radialGradient id="g2" cx="80%" cy="60%"><stop offset="0%" stop-color="%23f4a142" stop-opacity="0.1"/><stop offset="100%" stop-color="transparent"/></radialGradient></defs><rect fill="url(%23g1)" width="1440" height="900"/><rect fill="url(%23g2)" width="1440" height="900"/></svg>');background-size:cover;}
+.hero-dots{position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,0.04) 1px,transparent 1px);background-size:40px 40px;}
+.hero-content{position:relative;z-index:2;max-width:1200px;margin:0 auto;padding:0 40px;width:100%;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;}
+.hero-text{}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(46,196,182,0.15);border:1px solid rgba(46,196,182,0.3);padding:8px 18px;border-radius:50px;color:#7ee8e0;font-size:14px;font-weight:600;margin-bottom:24px;}
+.hero-badge::before{content:'✨';}
+.hero-title{font-size:clamp(42px,5.5vw,72px);font-weight:900;line-height:1.05;color:white;margin-bottom:20px;}
+.hero-title .accent{background:linear-gradient(135deg,#2ec4b6,#7ee8e0);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hero-title .gold{background:linear-gradient(135deg,#f4a142,#ffd166);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hero-subtitle{font-size:19px;color:rgba(255,255,255,0.75);line-height:1.7;margin-bottom:32px;max-width:520px;}
+.hero-ctas{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:48px;}
+.hero-stats{display:flex;gap:40px;}
+.stat-item{text-align:center;}
+.stat-num{font-size:32px;font-weight:900;color:var(--teal);display:block;}
+.stat-label{font-size:13px;color:rgba(255,255,255,0.6);font-weight:500;}
+.hero-visual{position:relative;}
+.hero-card{background:rgba(255,255,255,0.06);backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,0.12);border-radius:var(--radius-lg);overflow:hidden;}
+.hero-card-header{background:rgba(46,196,182,0.15);padding:20px 24px;border-bottom:1px solid rgba(255,255,255,0.08);}
+.hero-card-header h3{color:white;font-size:18px;font-weight:700;}
+.hero-card-header p{color:rgba(255,255,255,0.6);font-size:13px;}
+.property-list{padding:20px;}
+.property-item{display:flex;gap:16px;padding:16px;border-radius:12px;background:rgba(255,255,255,0.04);margin-bottom:12px;transition:var(--transition);cursor:pointer;border:1px solid rgba(255,255,255,0.06);}
+.property-item:hover{background:rgba(46,196,182,0.1);border-color:rgba(46,196,182,0.2);}
+.property-item:last-child{margin-bottom:0;}
+.prop-img{width:60px;height:60px;border-radius:10px;background:linear-gradient(135deg,rgba(46,196,182,0.3),rgba(46,196,182,0.1));display:flex;align-items:center;justify-content:center;font-size:28px;flex-shrink:0;}
+.prop-details{flex:1;}
+.prop-title{color:white;font-size:15px;font-weight:700;margin-bottom:4px;}
+.prop-location{color:rgba(255,255,255,0.5);font-size:13px;margin-bottom:6px;}
+.prop-price{color:var(--teal);font-size:18px;font-weight:800;}
+.prop-rooms{color:rgba(255,255,255,0.4);font-size:12px;}
+.prop-badge{display:inline-block;background:rgba(244,161,66,0.2);color:#ffd166;padding:3px 10px;border-radius:50px;font-size:11px;font-weight:700;}
+.notification-pill{background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);border-radius:60px;padding:14px 20px;display:flex;align-items:center;gap:12px;margin-top:12px;}
+.notif-icon{width:36px;height:36px;background:linear-gradient(135deg,var(--gold),var(--gold-dark));border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;}
+.notif-text{flex:1;}
+.notif-title{color:white;font-size:13px;font-weight:700;}
+.notif-sub{color:rgba(255,255,255,0.5);font-size:11px;}
+.notif-time{color:var(--teal);font-size:12px;font-weight:600;}
+</style><style>
+/* SEARCH SECTION */
+.search-section{padding:80px 0;background:var(--cream);}
+.search-box{background:white;border-radius:var(--radius-lg);padding:40px;box-shadow:var(--shadow-lg);max-width:900px;margin:0 auto;}
+.search-tabs{display:flex;gap:8px;margin-bottom:32px;background:var(--gray-light);padding:6px;border-radius:50px;}
+.search-tab{flex:1;padding:12px 24px;border-radius:50px;font-size:16px;font-weight:700;border:none;cursor:pointer;transition:var(--transition);color:var(--text-light);background:transparent;}
+.search-tab.active{background:var(--navy-mid);color:white;box-shadow:0 3px 12px rgba(26,46,90,0.25);}
+.search-fields{display:grid;grid-template-columns:1fr 1fr 1fr auto;gap:16px;align-items:end;}
+.field-group{display:flex;flex-direction:column;gap:6px;}
+.field-group label{font-size:13px;font-weight:700;color:var(--text-mid);text-transform:uppercase;letter-spacing:0.5px;}
+.field-group select,.field-group input{padding:14px 18px;border:2px solid var(--gray-mid);border-radius:12px;font-size:16px;font-family:'Assistant',sans-serif;background:var(--gray-light);color:var(--text-dark);transition:var(--transition);appearance:none;cursor:pointer;}
+.field-group select:focus,.field-group input:focus{outline:none;border-color:var(--teal);background:white;box-shadow:0 0 0 4px rgba(46,196,182,0.1);}
+.search-btn{padding:14px 32px;background:linear-gradient(135deg,var(--teal),var(--teal-dark));color:white;border:none;border-radius:12px;font-size:17px;font-weight:800;cursor:pointer;transition:var(--transition);white-space:nowrap;box-shadow:0 4px 15px rgba(46,196,182,0.35);}
+.search-btn:hover{transform:translateY(-2px);box-shadow:0 8px 25px rgba(46,196,182,0.45);}
+.popular-searches{display:flex;align-items:center;gap:12px;margin-top:20px;flex-wrap:wrap;}
+.popular-searches span{font-size:13px;color:var(--text-light);font-weight:600;}
+.popular-tag{display:inline-block;padding:6px 14px;background:var(--gray-light);border-radius:50px;font-size:13px;color:var(--text-mid);cursor:pointer;transition:var(--transition);border:1px solid var(--gray-mid);}
+.popular-tag:hover{background:rgba(46,196,182,0.1);border-color:var(--teal);color:var(--teal-dark);}
+/* HOW IT WORKS */
+.how-section{padding:100px 0;background:white;}
+.section-header{text-align:center;margin-bottom:64px;}
+.steps-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:40px;position:relative;}
+.steps-grid::before{content:'';position:absolute;top:50px;right:16.67%;left:16.67%;height:2px;background:linear-gradient(90deg,var(--teal),var(--navy-mid));opacity:0.2;}
+.step-card{text-align:center;position:relative;}
+.step-num{width:80px;height:80px;border-radius:50%;background:linear-gradient(135deg,var(--teal),var(--teal-dark));display:flex;align-items:center;justify-content:center;font-size:28px;font-weight:900;color:white;margin:0 auto 24px;position:relative;box-shadow:0 8px 30px rgba(46,196,182,0.35);z-index:2;}
+.step-num::after{content:'';position:absolute;inset:-8px;border-radius:50%;border:2px solid rgba(46,196,182,0.2);}
+.step-icon{font-size:36px;margin-bottom:12px;}
+.step-title{font-size:22px;font-weight:800;color:var(--navy);margin-bottom:12px;}
+.step-desc{font-size:16px;color:var(--text-light);line-height:1.7;}
+/* FEATURES */
+.features-section{padding:100px 0;background:linear-gradient(160deg,var(--navy) 0%,var(--navy-mid) 100%);}
+.features-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:32px;margin-top:64px;}
+.feature-card{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:var(--radius-lg);padding:36px;transition:var(--transition);}
+.feature-card:hover{background:rgba(255,255,255,0.08);transform:translateY(-4px);border-color:rgba(46,196,182,0.3);}
+.feature-card.highlight{background:linear-gradient(135deg,rgba(46,196,182,0.15),rgba(46,196,182,0.05));border-color:rgba(46,196,182,0.3);}
+.feature-icon{width:64px;height:64px;border-radius:16px;background:linear-gradient(135deg,rgba(46,196,182,0.2),rgba(46,196,182,0.08));display:flex;align-items:center;justify-content:center;font-size:30px;margin-bottom:20px;border:1px solid rgba(46,196,182,0.2);}
+.feature-title{font-size:22px;font-weight:800;color:white;margin-bottom:12px;}
+.feature-desc{font-size:16px;color:rgba(255,255,255,0.65);line-height:1.7;}
+.feature-list{margin-top:16px;list-style:none;}
+.feature-list li{display:flex;align-items:center;gap:10px;color:rgba(255,255,255,0.7);font-size:14px;margin-bottom:8px;}
+.feature-list li::before{content:'✓';color:var(--teal);font-weight:900;font-size:16px;flex-shrink:0;}
+/* PROPERTIES SHOWCASE */
+.properties-section{padding:100px 0;background:var(--cream);}
+.properties-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin-top:48px;}
+.property-card{background:white;border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow);transition:var(--transition);}
+.property-card:hover{transform:translateY(-6px);box-shadow:var(--shadow-lg);}
+.property-img{height:220px;background:linear-gradient(135deg,#e2e8f0,#cbd5e1);position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;font-size:80px;}
+.property-img.blue{background:linear-gradient(135deg,#dbeafe,#bfdbfe);}
+.property-img.green{background:linear-gradient(135deg,#dcfce7,#bbf7d0);}
+.property-img.orange{background:linear-gradient(135deg,#fef3c7,#fde68a);}
+.property-type-badge{position:absolute;top:16px;right:16px;background:var(--navy);color:white;padding:5px 14px;border-radius:50px;font-size:12px;font-weight:700;}
+.property-type-badge.rent{background:var(--teal-dark);}
+.property-type-badge.new{background:var(--gold-dark);}
+.property-save{position:absolute;top:16px;left:16px;width:36px;height:36px;background:rgba(255,255,255,0.9);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px;cursor:pointer;transition:var(--transition);}
+.property-save:hover{background:white;transform:scale(1.1);}
+.property-body{padding:24px;}
+.property-meta{display:flex;gap:16px;margin-bottom:12px;}
+.property-meta span{display:flex;align-items:center;gap:4px;font-size:13px;color:var(--text-light);}
+.property-title{font-size:19px;font-weight:800;color:var(--navy);margin-bottom:6px;}
+.property-location{font-size:14px;color:var(--text-light);margin-bottom:16px;display:flex;align-items:center;gap:4px;}
+.property-price-row{display:flex;align-items:center;justify-content:space-between;padding-top:16px;border-top:1px solid var(--gray-mid);}
+.property-price{font-size:22px;font-weight:900;color:var(--navy);}
+.property-price span{font-size:14px;font-weight:500;color:var(--text-light);}
+.property-cta{padding:10px 20px;background:linear-gradient(135deg,var(--teal),var(--teal-dark));color:white;border:none;border-radius:50px;font-size:14px;font-weight:700;cursor:pointer;transition:var(--transition);}
+.property-cta:hover{transform:translateY(-1px);box-shadow:0 4px 15px rgba(46,196,182,0.35);}
+/* TESTIMONIALS */
+.testimonials-section{padding:100px 0;background:white;}
+.testimonials-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin-top:48px;}
+.testimonial-card{background:var(--cream);border-radius:var(--radius-lg);padding:32px;border:1px solid var(--gray-mid);transition:var(--transition);position:relative;}
+.testimonial-card::before{content:'"';position:absolute;top:20px;right:28px;font-size:80px;color:var(--teal);opacity:0.15;font-family:Georgia,serif;line-height:1;}
+.testimonial-card:hover{transform:translateY(-4px);box-shadow:var(--shadow);}
+.testimonial-stars{display:flex;gap:4px;margin-bottom:16px;}
+.star{color:var(--gold);}
+.testimonial-text{font-size:16px;color:var(--text-mid);line-height:1.75;margin-bottom:20px;font-style:italic;}
+.testimonial-author{display:flex;align-items:center;gap:12px;}
+.author-avatar{width:48px;height:48px;border-radius:50%;background:linear-gradient(135deg,var(--teal),var(--navy-mid));display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:900;color:white;}
+.author-name{font-size:16px;font-weight:800;color:var(--navy);}
+.author-city{font-size:13px;color:var(--text-light);}
+/* STATS SECTION */
+.stats-section{padding:80px 0;background:linear-gradient(135deg,var(--teal) 0%,var(--teal-dark) 100%);}
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:40px;text-align:center;}
+.stat-card{}
+.stat-num-big{font-size:54px;font-weight:900;color:white;line-height:1;margin-bottom:8px;}
+.stat-num-big span{font-size:32px;}
+.stat-label-big{font-size:17px;color:rgba(255,255,255,0.8);font-weight:600;}
+/* BROKERS */
+.brokers-section{padding:100px 0;background:var(--navy);}
+.brokers-inner{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;}
+.brokers-benefits{list-style:none;margin:32px 0;}
+.broker-benefit{display:flex;align-items:flex-start;gap:16px;margin-bottom:24px;}
+.benefit-icon{width:48px;height:48px;border-radius:12px;background:rgba(46,196,182,0.15);border:1px solid rgba(46,196,182,0.25);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;}
+.benefit-text{}
+.benefit-title{font-size:18px;font-weight:800;color:white;margin-bottom:4px;}
+.benefit-desc{font-size:15px;color:rgba(255,255,255,0.6);line-height:1.6;}
+.broker-form{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.12);border-radius:var(--radius-lg);padding:40px;}
+.form-title{font-size:24px;font-weight:800;color:white;margin-bottom:8px;}
+.form-subtitle{font-size:15px;color:rgba(255,255,255,0.6);margin-bottom:28px;}
+.form-field{margin-bottom:16px;}
+.form-field label{display:block;font-size:13px;font-weight:700;color:rgba(255,255,255,0.7);margin-bottom:6px;}
+.form-field input,.form-field select{width:100%;padding:14px 18px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.15);border-radius:12px;color:white;font-size:15px;font-family:'Assistant',sans-serif;transition:var(--transition);}
+.form-field input::placeholder{color:rgba(255,255,255,0.35);}
+.form-field input:focus,.form-field select:focus{outline:none;border-color:var(--teal);background:rgba(255,255,255,0.09);}
+.form-field select option{background:var(--navy);color:white;}
+.form-grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+.form-submit{width:100%;padding:16px;background:linear-gradient(135deg,var(--teal),var(--teal-dark));color:white;border:none;border-radius:12px;font-size:18px;font-weight:800;cursor:pointer;transition:var(--transition);margin-top:8px;box-shadow:0 4px 20px rgba(46,196,182,0.35);}
+.form-submit:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(46,196,182,0.45);}
+/* FAQ */
+.faq-section{padding:100px 0;background:var(--cream);}
+.faq-list{max-width:800px;margin:48px auto 0;}
+.faq-item{background:white;border-radius:var(--radius);margin-bottom:12px;overflow:hidden;border:1px solid var(--gray-mid);transition:var(--transition);}
+.faq-item.open{border-color:var(--teal);}
+.faq-question{display:flex;align-items:center;justify-content:space-between;padding:22px 28px;cursor:pointer;gap:16px;}
+.faq-q-text{font-size:18px;font-weight:700;color:var(--navy);}
+.faq-icon{width:32px;height:32px;border-radius:50%;background:var(--gray-light);display:flex;align-items:center;justify-content:center;font-size:18px;transition:var(--transition);flex-shrink:0;}
+.faq-item.open .faq-icon{background:var(--teal);color:white;transform:rotate(45deg);}
+.faq-answer{max-height:0;overflow:hidden;transition:max-height 0.4s ease;}
+.faq-item.open .faq-answer{max-height:300px;}
+.faq-answer-inner{padding:0 28px 24px;font-size:16px;color:var(--text-mid);line-height:1.75;}
+/* CTA BANNER */
+.cta-banner{padding:100px 0;background:linear-gradient(135deg,#0d1f3c 0%,#1a3a6b 50%,#0d3353 100%);position:relative;overflow:hidden;text-align:center;}
+.cta-banner::before{content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:radial-gradient(ellipse at center,rgba(46,196,182,0.1) 0%,transparent 70%);}
+.cta-content{position:relative;z-index:2;max-width:700px;margin:0 auto;}
+.cta-title{font-size:clamp(32px,4vw,56px);font-weight:900;color:white;margin-bottom:20px;}
+.cta-subtitle{font-size:19px;color:rgba(255,255,255,0.75);margin-bottom:40px;line-height:1.7;}
+.cta-buttons{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;}
+/* ARTICLES */
+.articles-section{padding:100px 0;background:white;}
+.articles-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin-top:48px;}
+.article-card{border-radius:var(--radius-lg);overflow:hidden;border:1px solid var(--gray-mid);transition:var(--transition);}
+.article-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg);border-color:transparent;}
+.article-img{height:200px;display:flex;align-items:center;justify-content:center;font-size:70px;position:relative;}
+.article-img.green{background:linear-gradient(135deg,#dcfce7,#a7f3d0);}
+.article-img.blue{background:linear-gradient(135deg,#dbeafe,#bfdbfe);}
+.article-img.yellow{background:linear-gradient(135deg,#fef9c3,#fef08a);}
+.article-category{position:absolute;bottom:16px;right:16px;padding:5px 14px;border-radius:50px;font-size:12px;font-weight:700;background:white;}
+.article-category.brokers{color:var(--navy);}
+.article-category.buyers{color:var(--teal-dark);}
+.article-category.sellers{color:var(--gold-dark);}
+.article-body{padding:24px;}
+.article-meta{display:flex;align-items:center;gap:12px;margin-bottom:12px;}
+.article-date{font-size:12px;color:var(--text-light);}
+.article-read{font-size:12px;color:var(--text-light);display:flex;align-items:center;gap:4px;}
+.article-title{font-size:18px;font-weight:800;color:var(--navy);margin-bottom:10px;line-height:1.4;}
+.article-excerpt{font-size:14px;color:var(--text-light);line-height:1.7;}
+.article-link{display:inline-flex;align-items:center;gap:6px;color:var(--teal-dark);font-weight:700;font-size:14px;margin-top:16px;}
+/* FOOTER */
+.footer{background:var(--navy);color:white;padding:80px 0 0;}
+.footer-top{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:60px;padding-bottom:60px;border-bottom:1px solid rgba(255,255,255,0.1);}
+.footer-brand{}
+.footer-logo{display:flex;align-items:center;gap:10px;margin-bottom:20px;}
+.footer-logo .logo-icon{background:linear-gradient(135deg,var(--teal),var(--navy-mid));}
+.footer-logo .logo-text{color:white;}
+.footer-desc{font-size:15px;color:rgba(255,255,255,0.6);line-height:1.75;margin-bottom:24px;max-width:320px;}
+.footer-contact a{display:flex;align-items:center;gap:8px;color:rgba(255,255,255,0.7);font-size:14px;margin-bottom:8px;transition:var(--transition);}
+.footer-contact a:hover{color:var(--teal);}
+.footer-col-title{font-size:15px;font-weight:800;color:white;margin-bottom:20px;letter-spacing:0.5px;}
+.footer-links{list-style:none;}
+.footer-links li{margin-bottom:10px;}
+.footer-links a{font-size:14px;color:rgba(255,255,255,0.6);transition:var(--transition);}
+.footer-links a:hover{color:var(--teal);}
+.footer-bottom{padding:24px 0;display:flex;align-items:center;justify-content:space-between;font-size:13px;color:rgba(255,255,255,0.4);}
+.footer-bottom-links{display:flex;gap:20px;}
+.footer-bottom-links a{color:rgba(255,255,255,0.4);transition:var(--transition);}
+.footer-bottom-links a:hover{color:rgba(255,255,255,0.7);}
+/* FLOATING ELEMENTS */
+.floating-cta{position:fixed;bottom:30px;left:30px;z-index:999;background:linear-gradient(135deg,var(--gold),var(--gold-dark));color:white;padding:14px 24px;border-radius:50px;font-size:15px;font-weight:800;box-shadow:0 8px 30px rgba(244,161,66,0.45);cursor:pointer;transition:var(--transition);display:flex;align-items:center;gap:8px;border:none;}
+.floating-cta:hover{transform:translateY(-3px);box-shadow:0 12px 40px rgba(244,161,66,0.55);}
+/* ALERT BANNER */
+.alert-banner{background:linear-gradient(135deg,rgba(46,196,182,0.12),rgba(46,196,182,0.06));border-bottom:1px solid rgba(46,196,182,0.2);padding:12px 40px;display:flex;align-items:center;justify-content:center;gap:12px;position:relative;z-index:999;}
+.alert-text{font-size:14px;font-weight:600;color:var(--navy-mid);}
+.alert-badge{background:var(--teal);color:white;padding:4px 12px;border-radius:50px;font-size:12px;font-weight:800;}
+.alert-link{color:var(--teal-dark);font-weight:700;font-size:14px;}
+/* SCROLL ANIMATIONS */
+.animate-in{opacity:0;transform:translateY(30px);transition:opacity 0.7s ease,transform 0.7s ease;}
+.animate-in.visible{opacity:1;transform:translateY(0);}
+.delay-1{transition-delay:0.1s;}
+.delay-2{transition-delay:0.2s;}
+.delay-3{transition-delay:0.3s;}
+/* RESPONSIVE */
+@media(max-width:1024px){
+  .hero-content{grid-template-columns:1fr;}
+  .hero-visual{display:none;}
+  .features-grid{grid-template-columns:1fr;}
+  .brokers-inner{grid-template-columns:1fr;}
+}
+@media(max-width:768px){
+  .navbar-links{display:none;}
+  .properties-grid,.testimonials-grid,.articles-grid{grid-template-columns:1fr;}
+  .stats-grid{grid-template-columns:repeat(2,1fr);}
+  .steps-grid{grid-template-columns:1fr;}
+  .steps-grid::before{display:none;}
+  .footer-top{grid-template-columns:1fr 1fr;}
+  .search-fields{grid-template-columns:1fr;gap:12px;}
+  .hero-stats{gap:24px;}
+  .hero-title{font-size:38px;}
+}
+</style>
+</head>
+<body>
+<!-- ALERT BANNER -->
+<div class="alert-banner">
+  <span class="alert-badge">🔥 חדש</span>
+  <span class="alert-text">תקופת השקה - פרסום דירות ב<strong>חינם לחלוטין</strong> למוכרים ומתווכים!</span>
+  <a href="#brokers" class="alert-link">לפרטים ←</a>
+</div>
+
+<!-- NAVBAR -->
+<nav class="navbar" id="navbar">
+  <div class="navbar-inner">
+    <div class="navbar-logo" onclick="scrollToTop()">
+      <div class="logo-icon">ד</div>
+      <span class="logo-text">דירת<span>א</span></span>
+    </div>
+    <div class="navbar-links">
+      <a href="#how">איך זה עובד</a>
+      <a href="#properties">דירות למכירה</a>
+      <a href="#rent">דירות להשכרה</a>
+      <a href="#brokers">למתווכים</a>
+      <a href="#articles">מאמרים</a>
+    </div>
+    <div class="navbar-actions">
+      <button class="nav-btn-outline" onclick="scrollToSection('brokers')">🔔 התראות על דירות</button>
+      <button class="nav-btn-primary" onclick="scrollToSection('post')">פרסום בדירתא ←</button>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-dots"></div>
+  <div class="hero-content">
+    <div class="hero-text animate-in">
+      <div class="hero-badge">הפלטפורמה החכמה לנדל"ן חרדי</div>
+      <h1 class="hero-title">
+        דירה שמחפשים?<br>
+        <span class="accent">תפסיקו לרדוף.</span><br>
+        <span class="gold">היא תגיע אליכם.</span>
+      </h1>
+      <p class="hero-subtitle">המנוע החכם שלנו סורק בשבילכם 24/7 ושולח התראות מדויקות בזמן אמת — ישירות לנייד או למייל. ירושלים, בני ברק, בית שמש, אלעד ועוד.</p>
+      <div class="hero-ctas">
+        <button class="btn-gold" onclick="scrollToSection('search')">🔍 חפשו דירה עכשיו</button>
+        <button class="btn-secondary" style="color:rgba(255,255,255,0.8);border-color:rgba(255,255,255,0.3);" onclick="scrollToSection('how')">איך זה עובד?</button>
+      </div>
+      <div class="hero-stats">
+        <div class="stat-item">
+          <span class="stat-num">12,000+</span>
+          <span class="stat-label">דירות במאגר</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-num">98%</span>
+          <span class="stat-label">לידים רלוונטיים</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-num">3 דק'</span>
+          <span class="stat-label">עד לקבלת התראה</span>
+        </div>
+      </div>
+    </div>
+    <div class="hero-visual animate-in delay-2">
+      <div class="hero-card">
+        <div class="hero-card-header">
+          <h3>🏠 דירות חמות להיום</h3>
+          <p>עודכן לפני 3 דקות</p>
+        </div>
+        <div class="property-list">
+          <div class="property-item">
+            <div class="prop-img">🏢</div>
+            <div class="prop-details">
+              <div class="prop-title">4 חדרים - בית שמש רמה ג'</div>
+              <div class="prop-location">📍 רחוב נחל לכיש, שכונה ז'</div>
+              <div class="prop-price">₪1,450,000</div>
+            </div>
+            <div class="prop-badge">חדש!</div>
+          </div>
+          <div class="property-item">
+            <div class="prop-img">🏘️</div>
+            <div class="prop-details">
+              <div class="prop-title">3 חדרים להשכרה - בני ברק</div>
+              <div class="prop-location">📍 רחוב רבי עקיבא, מרכז</div>
+              <div class="prop-price">₪5,200/חודש</div>
+            </div>
+            <div class="prop-badge">זמין</div>
+          </div>
+          <div class="property-item">
+            <div class="prop-img">🏗️</div>
+            <div class="prop-details">
+              <div class="prop-title">5 חדרים - ירושלים הר נוף</div>
+              <div class="prop-location">📍 שכונת הר נוף, חרדי</div>
+              <div class="prop-price">₪2,100,000</div>
+            </div>
+            <div class="prop-badge">חם!</div>
+          </div>
+        </div>
+        <div class="notification-pill">
+          <div class="notif-icon">🔔</div>
+          <div class="notif-text">
+            <div class="notif-title">התראה חדשה: 3 דירות תואמות לחיפוש שלכם!</div>
+            <div class="notif-sub">בית שמש • 4 חדרים • עד 1.6M</div>
+          </div>
+          <div class="notif-time">עכשיו</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- SEARCH SECTION -->
+<section class="search-section" id="search">
+  <div class="container">
+    <div style="text-align:center;margin-bottom:40px;">
+      <div class="section-tag">🔍 מנוע חיפוש חכם</div>
+      <h2 class="section-title">מצאו את הדירה <span>המושלמת</span></h2>
+      <p class="section-subtitle" style="margin:16px auto 0;">סנו לפי עיר, שכונה, מחיר וחדרים — ותנו למערכת לעשות את השאר</p>
+    </div>
+    <div class="search-box">
+      <div class="search-tabs">
+        <button class="search-tab active" onclick="setTab(this,'sale')">🏠 לקנות דירה</button>
+        <button class="search-tab" onclick="setTab(this,'rent')">🔑 לשכור דירה</button>
+        <button class="search-tab" onclick="setTab(this,'alert')">🔔 הגדרת התראה</button>
+      </div>
+      <div class="search-fields">
+        <div class="field-group">
+          <label>עיר</label>
+          <select>
+            <option value="">כל הערים</option>
+            <option>ירושלים</option>
+            <option>בני ברק</option>
+            <option>בית שמש</option>
+            <option>אלעד</option>
+            <option>מודיעין עילית</option>
+            <option>ביתר עילית</option>
+            <option>אשדוד</option>
+            <option>פתח תקווה</option>
+          </select>
+        </div>
+        <div class="field-group">
+          <label>מספר חדרים</label>
+          <select>
+            <option value="">כל הגדלים</option>
+            <option>1-2 חדרים</option>
+            <option>3 חדרים</option>
+            <option>3.5 חדרים</option>
+            <option>4 חדרים</option>
+            <option>4.5 חדרים</option>
+            <option>5+ חדרים</option>
+          </select>
+        </div>
+        <div class="field-group">
+          <label>תקציב מקסימלי</label>
+          <select>
+            <option value="">ללא הגבלה</option>
+            <option>עד 800,000 ₪</option>
+            <option>עד 1,200,000 ₪</option>
+            <option>עד 1,600,000 ₪</option>
+            <option>עד 2,000,000 ₪</option>
+            <option>עד 2,500,000 ₪</option>
+            <option>מעל 2,500,000 ₪</option>
+          </select>
+        </div>
+        <button class="search-btn">🔍 חפש עכשיו</button>
+      </div>
+      <div class="popular-searches">
+        <span>חיפושים פופולריים:</span>
+        <span class="popular-tag">4 חדרים בבית שמש</span>
+        <span class="popular-tag">3 חדרים בבני ברק</span>
+        <span class="popular-tag">ירושלים הר נוף</span>
+        <span class="popular-tag">מודיעין עילית</span>
+        <span class="popular-tag">קנייה עד 1.5M</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how-section" id="how">
+  <div class="container">
+    <div class="section-header animate-in">
+      <div class="section-tag">⚡ תהליך פשוט</div>
+      <h2 class="section-title">ככה זה <span>עובד</span></h2>
+      <p class="section-subtitle" style="margin:16px auto 0;">3 צעדים פשוטים — ואתם בדרך לדירה הבאה שלכם</p>
+    </div>
+    <div class="steps-grid">
+      <div class="step-card animate-in delay-1">
+        <div class="step-num">1</div>
+        <div class="step-icon">🎯</div>
+        <h3 class="step-title">מגדירים ושומרים</h3>
+        <p class="step-desc">בוחרים עיר, שכונה, תקציב וגודל — לחיצה אחת על "שמור חיפוש" ואתם מפעילים את הסוכן הדיגיטלי האישי שלכם.</p>
+      </div>
+      <div class="step-card animate-in delay-2">
+        <div class="step-num">2</div>
+        <div class="step-icon">🤖</div>
+        <h3 class="step-title">המערכת עובדת</h3>
+        <p class="step-desc">המנוע שלנו סורק 24/7 ומסנן בקפידה. כשמישהו מעלה דירה שתואמת בדיוק לחיפוש שלכם — אנחנו יודעים מיידית.</p>
+      </div>
+      <div class="step-card animate-in delay-3">
+        <div class="step-num">3</div>
+        <div class="step-icon">🔔</div>
+        <h3 class="step-title">מקבלים התראה</h3>
+        <p class="step-desc">בינגו! ההתראה מגיעה ישירות למייל, בשיחה קולית לטלפון הכשר, או בהודעה. אתם בין הראשונים ליצור קשר.</p>
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:48px;">
+      <button class="btn-primary" onclick="scrollToSection('search')">התחילו עכשיו — זה בחינם ←</button>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="features-section">
+  <div class="container">
+    <div class="section-header animate-in" style="text-align:center;">
+      <div class="section-tag" style="background:rgba(46,196,182,0.15);color:#7ee8e0;">💎 המערכת החכמה</div>
+      <h2 class="section-title" style="color:white;">כל מה שהצלחה <span>דורשת</span></h2>
+      <p class="section-subtitle" style="color:rgba(255,255,255,0.7);margin:16px auto 0;">טכנולוגיה מתקדמת בשירות הקהילה החרדית</p>
+    </div>
+    <div class="features-grid">
+      <div class="feature-card highlight animate-in delay-1">
+        <div class="feature-icon">🎯</div>
+        <h3 class="feature-title">סינון חכם ומדויק</h3>
+        <p class="feature-desc">לא רק עיר — אלא שכונה ספציפית, מרחק מחיידר, קהילה מועדפת. הסינון שלנו ברמת רחוב.</p>
+        <ul class="feature-list">
+          <li>סינון לפי שכונה ורחוב</li>
+          <li>חיפוש ויזואלי על מפה</li>
+          <li>קרבה למוסדות חינוך</li>
+          <li>סינון לפי קהילה ומנהג</li>
+        </ul>
+      </div>
+      <div class="feature-card animate-in delay-2">
+        <div class="feature-icon">📞</div>
+        <h3 class="feature-title">התראות לטלפון הכשר</h3>
+        <p class="feature-desc">לא דורשים מכם לגלול לוחות. שיחה קולית ישירות לנייד הכשר — מיד כשעולה דירה רלוונטית.</p>
+        <ul class="feature-list">
+          <li>שיחה קולית לטלפון כשר</li>
+          <li>מייל עם כל הפרטים</li>
+          <li>בחירת תדירות התראות</li>
+          <li>ניהול ועדכון בקלות</li>
+        </ul>
+      </div>
+      <div class="feature-card animate-in delay-1">
+        <div class="feature-icon">⚡</div>
+        <h3 class="feature-title">ישר לעניין</h3>
+        <p class="feature-desc">לחיצה אחת מחברת אתכם ישירות למפרסם. ללא מתווכים מיותרים, ללא עיכובים.</p>
+        <ul class="feature-list">
+          <li>קשר ישיר עם המפרסם</li>
+          <li>כפתור "קבע סיור" מיידי</li>
+          <li>מידע מלא על הדירה</li>
+          <li>תמונות, תיאור ומחיר</li>
+        </ul>
+      </div>
+      <div class="feature-card animate-in delay-2">
+        <div class="feature-icon">🆓</div>
+        <h3 class="feature-title">לגמרי בחינם לרוכשים</h3>
+        <p class="feature-desc">השירות למחפשי דירות הוא בחינם לחלוטין. המטרה שלנו: שתמצאו את הדירה הבאה שלכם בקלות.</p>
+        <ul class="feature-list">
+          <li>הרשמה חינמית</li>
+          <li>חיפוש ללא הגבלה</li>
+          <li>התראות בחינם</li>
+          <li>אין עמלות נסתרות</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- PROPERTIES SHOWCASE -->
+<section class="properties-section" id="properties">
+  <div class="container">
+    <div style="display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:48px;" class="animate-in">
+      <div>
+        <div class="section-tag">🏠 דירות חמות</div>
+        <h2 class="section-title">נכסים <span>נבחרים</span></h2>
+        <p class="section-subtitle" style="margin-top:12px;">מהמאגר הכי עדכני ומדויק לקהילה החרדית</p>
+      </div>
+      <button class="btn-secondary" onclick="scrollToSection('search')">לכל הדירות ←</button>
+    </div>
+    <div class="properties-grid">
+      <div class="property-card animate-in delay-1">
+        <div class="property-img blue">
+          🏢
+          <span class="property-type-badge">למכירה</span>
+          <span class="property-save">♡</span>
+        </div>
+        <div class="property-body">
+          <div class="property-meta">
+            <span>🛏️ 4 חדרים</span>
+            <span>📐 110 מ"ר</span>
+            <span>🏗️ קומה 3</span>
+          </div>
+          <h3 class="property-title">דירת 4 חדרים מרווחת</h3>
+          <div class="property-location">📍 שכונת רמה ג', בית שמש</div>
+          <p style="font-size:13px;color:var(--text-light);margin-bottom:0;">מרפסת שמש, חניה, ממ"ד, קרוב לחיידר ובית כנסת. שכונה חרדית איכותית.</p>
+          <div class="property-price-row">
+            <div class="property-price">₪1,450,000 <span>כולל</span></div>
+            <button class="property-cta">פרטים ←</button>
+          </div>
+        </div>
+      </div>
+      <div class="property-card animate-in delay-2">
+        <div class="property-img green">
+          🏘️
+          <span class="property-type-badge rent">להשכרה</span>
+          <span class="property-save">♡</span>
+        </div>
+        <div class="property-body">
+          <div class="property-meta">
+            <span>🛏️ 3 חדרים</span>
+            <span>📐 85 מ"ר</span>
+            <span>🏗️ קומה 1</span>
+          </div>
+          <h3 class="property-title">דירה משופצת להשכרה</h3>
+          <div class="property-location">📍 רחוב רבי עקיבא, בני ברק</div>
+          <p style="font-size:13px;color:var(--text-light);margin-bottom:0;">משופצת לגמרי, מטבח חדש, נגישות מצוינת. ממש בלב בני ברק.</p>
+          <div class="property-price-row">
+            <div class="property-price">₪5,200 <span>/חודש</span></div>
+            <button class="property-cta">פרטים ←</button>
+          </div>
+        </div>
+      </div>
+      <div class="property-card animate-in delay-3">
+        <div class="property-img orange">
+          🏗️
+          <span class="property-type-badge new">חדש מקבלן</span>
+          <span class="property-save">♡</span>
+        </div>
+        <div class="property-body">
+          <div class="property-meta">
+            <span>🛏️ 5 חדרים</span>
+            <span>📐 130 מ"ר</span>
+            <span>🏗️ קומה 5</span>
+          </div>
+          <h3 class="property-title">פנטהאוז יוקרתי - הר נוף</h3>
+          <div class="property-location">📍 שכונת הר נוף, ירושלים</div>
+          <p style="font-size:13px;color:var(--text-light);margin-bottom:0;">נוף פנורמי לירושלים, גג פרטי, 2 חניות. שכונה חרדית יוקרתית.</p>
+          <div class="property-price-row">
+            <div class="property-price">₪2,800,000 <span>כולל</span></div>
+            <button class="property-cta">פרטים ←</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:40px;">
+      <button class="btn-primary" onclick="scrollToSection('search')">🔍 צפו בכל 12,000+ הדירות ←</button>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<section class="stats-section">
+  <div class="container">
+    <div class="stats-grid">
+      <div class="stat-card animate-in delay-1">
+        <div class="stat-num-big">12K<span>+</span></div>
+        <div class="stat-label-big">דירות במאגר</div>
+      </div>
+      <div class="stat-card animate-in delay-2">
+        <div class="stat-num-big">98<span>%</span></div>
+        <div class="stat-label-big">שביעות רצון</div>
+      </div>
+      <div class="stat-card animate-in delay-3">
+        <div class="stat-num-big">3<span>דק'</span></div>
+        <div class="stat-label-big">עד קבלת התראה</div>
+      </div>
+      <div class="stat-card animate-in delay-3">
+        <div class="stat-num-big">500<span>+</span></div>
+        <div class="stat-label-big">מתווכים פעילים</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials-section">
+  <div class="container">
+    <div class="section-header animate-in" style="text-align:center;">
+      <div class="section-tag">⭐ מה הלקוחות אומרים</div>
+      <h2 class="section-title">סיפורי <span>הצלחה</span></h2>
+      <p class="section-subtitle" style="margin:16px auto 0;">משפחות שמצאו את הדירה שלהן דרך דירתא</p>
+    </div>
+    <div class="testimonials-grid">
+      <div class="testimonial-card animate-in delay-1">
+        <div class="testimonial-stars">
+          <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
+        </div>
+        <p class="testimonial-text">אחרי חצי שנה של חיפוש מייאש בלוחות שונים, הגדרנו חיפוש בדירתא. תוך 4 ימים קיבלנו התראה על הדירה המושלמת שלנו בבית שמש. אנחנו כבר גרים שם!</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">מ</div>
+          <div>
+            <div class="author-name">משפחת שטרן</div>
+            <div class="author-city">📍 בית שמש רמה ג'</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card animate-in delay-2">
+        <div class="testimonial-stars">
+          <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
+        </div>
+        <p class="testimonial-text">כמתווך, דירתא שינתה לי את החיים. הלידים שמגיעים אלי עכשיו הם רציניים ממוקדים. הפסקתי לבזבז שעות על שיחות סרק — רק עסקאות אמיתיות!</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">י</div>
+          <div>
+            <div class="author-name">ר' יוסף לוי — מתווך</div>
+            <div class="author-city">📍 בני ברק, 12 שנות ניסיון</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card animate-in delay-3">
+        <div class="testimonial-stars">
+          <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
+        </div>
+        <p class="testimonial-text">יש לי טלפון כשר ולא הייתי בטוח שזה יתאים לי. אבל ההתראה בשיחה קולית עבדה מושלם! קיבלתי שיחה, שמעתי את הפרטים, התקשרתי למפרסם — וזהו. דירה ביד!</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">ד</div>
+          <div>
+            <div class="author-name">ר' דוד גולדברג</div>
+            <div class="author-city">📍 ירושלים, שכן הנוף</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- BROKERS SECTION -->
+<section class="brokers-section" id="brokers">
+  <div class="container">
+    <div class="brokers-inner">
+      <div class="animate-in">
+        <div class="section-tag" style="background:rgba(46,196,182,0.15);color:#7ee8e0;">🏆 למתווכים ומפרסמים</div>
+        <h2 class="section-title" style="color:white;">פחות בזבוז זמן.<br><span>יותר עסקאות.</span></h2>
+        <p style="font-size:18px;color:rgba(255,255,255,0.7);margin:20px 0 32px;line-height:1.7;">דירתא היא לא עוד לוח פרסום. זו המערכת החכמה שמשדכת את הדירות שלכם ישירות למחפשים הרציניים ביותר.</p>
+        <ul class="brokers-benefits">
+          <li class="broker-benefit">
+            <div class="benefit-icon">🎯</div>
+            <div class="benefit-text">
+              <div class="benefit-title">לידים חמים וממוקדים</div>
+              <div class="benefit-desc">סוף לטלפונים לא רלוונטיים. רק רוכשים ושוכרים שחיפשו בדיוק את מה שיש לכם.</div>
+            </div>
+          </li>
+          <li class="broker-benefit">
+            <div class="benefit-icon">📊</div>
+            <div class="benefit-text">
+              <div class="benefit-title">מרכז שליטה מתקדם</div>
+              <div class="benefit-desc">ניהול כל הנכסים, מעקב לידים, וסטטיסטיקות בזמן אמת — הכל ממקום אחד.</div>
+            </div>
+          </li>
+          <li class="broker-benefit">
+            <div class="benefit-icon">📣</div>
+            <div class="benefit-text">
+              <div class="benefit-title">חשיפה אקטיבית לאלפים</div>
+              <div class="benefit-desc">כל דירה שמפרסמים נשלחת בהתראה אקטיבית לאלפי מחפשים רלוונטיים באותו רגע.</div>
+            </div>
+          </li>
+          <li class="broker-benefit">
+            <div class="benefit-icon">💰</div>
+            <div class="benefit-text">
+              <div class="benefit-title">מנוי קבוע — אפס הפתעות</div>
+              <div class="benefit-desc">מודל פשוט ושקוף. אין עמלות על עסקאות. בחבילה שמתאימה לגודל המשרד שלכם.</div>
+            </div>
+          </li>
+        </ul>
+        <div style="background:rgba(46,196,182,0.1);border:1px solid rgba(46,196,182,0.25);border-radius:12px;padding:16px 20px;display:inline-flex;align-items:center;gap:12px;">
+          <span style="font-size:22px;">🎁</span>
+          <div>
+            <div style="color:white;font-size:15px;font-weight:800;">תקופת השקה: פרסום בחינם!</div>
+            <div style="color:rgba(255,255,255,0.6);font-size:13px;">הצטרפו עכשיו ולא תשלמו דבר עד סוף 2026</div>
+          </div>
+        </div>
+      </div>
+      <div class="broker-form animate-in delay-2">
+        <div class="form-title">צרו קשר עכשיו</div>
+        <div class="form-subtitle">סוכן דירתא יחזור אליכם לבניית חבילה מושלמת</div>
+        <div class="form-grid-2">
+          <div class="form-field">
+            <label>שם מלא</label>
+            <input type="text" placeholder="ישראל ישראלי">
+          </div>
+          <div class="form-field">
+            <label>טלפון</label>
+            <input type="tel" placeholder="050-0000000">
+          </div>
+        </div>
+        <div class="form-field">
+          <label>כתובת מייל</label>
+          <input type="email" placeholder="name@office.co.il">
+        </div>
+        <div class="form-field">
+          <label>שם המשרד</label>
+          <input type="text" placeholder="משרד תיווך XYZ">
+        </div>
+        <div class="form-field">
+          <label>ערים בהן הארגון פועל</label>
+          <select>
+            <option>בחרו עיר</option>
+            <option>ירושלים</option>
+            <option>בני ברק</option>
+            <option>בית שמש</option>
+            <option>אלעד</option>
+            <option>מספר ערים</option>
+          </select>
+        </div>
+        <button class="form-submit">שלחו פרטים — נחזור מהר ←</button>
+        <p style="text-align:center;font-size:12px;color:rgba(255,255,255,0.4);margin-top:12px;">על ידי שליחה מאשרים את <a href="#" style="color:var(--teal);">תנאי השימוש</a></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq-section" id="faq">
+  <div class="container">
+    <div class="section-header animate-in" style="text-align:center;">
+      <div class="section-tag">❓ שאלות ותשובות</div>
+      <h2 class="section-title">כל מה שרציתם <span>לדעת</span></h2>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item open">
+        <div class="faq-question" onclick="toggleFaq(this)">
+          <span class="faq-q-text">מה זה בעצם דירתא ואיך זה שונה מלוחות אחרים?</span>
+          <div class="faq-icon">+</div>
+        </div>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">דירתא היא פלטפורמת נדל"ן שמהפכת את תהליך חיפוש הדירה: במקום שאתם תסרקו לוחות שעות ביום — הדירות מגיעות אליכם. המנוע החכם שלנו עוקב ומתריע בזמן אמת, ברמת סינון של שכונה ורחוב. בנוסף, דירתא מתמקדת בקהילה החרדית — עם הבנה של שכונות, קהילות ומוסדות חינוך.</div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">
+          <span class="faq-q-text">כמה עולה להשתמש בדירתא כמחפש דירה?</span>
+          <div class="faq-icon">+</div>
+        </div>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">למחפשי דירות — בחינם לחלוטין! הרשמה, חיפוש, שמירת חיפושים, וקבלת התראות — הכל ללא עלות. המטרה שלנו היא שתמצאו את הדירה הבאה שלכם.</div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">
+          <span class="faq-q-text">יש לי טלפון כשר — האם זה עובד עבורי?</span>
+          <div class="faq-icon">+</div>
+        </div>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">בדיוק בשביל זה פיתחנו את מערכת ההתראות בשיחה קולית! אתם מגדירים את החיפוש (אפשר דרך בן/בת משפחה עם טלפון רגיל), ואנחנו מתקשרים אליכם לטלפון הכשר כשעולה דירה מתאימה.</div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">
+          <span class="faq-q-text">אני עסוק — כמה התראות אקבל? אני לא רוצה הצפה.</span>
+          <div class="faq-icon">+</div>
+        </div>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">השליטה בידיים שלכם! ניתן להגדיר התראה מיידית, או מרוכזת (פעם ביום/שבוע). גם ניתן לבחור מייל בלבד, שיחה קולית בלבד, או שניהם. ומכיבים ומפעילים בלחיצה.</div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">
+          <span class="faq-q-text">מי עומד מאחורי דירתא?</span>
+          <div class="faq-icon">+</div>
+        </div>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">צוות של מומחים מובילים מתחומי הנדל"ן, הטכנולוגיה, האסטרטגיה והעיצוב הדיגיטלי. כולם מהקהילה, מכירים את הצרכים מבפנים, ומחויבים להציב סטנדרט חדש בשוק הנדל"ן החרדי.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- ARTICLES -->
+<section class="articles-section" id="articles">
+  <div class="container">
+    <div style="display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:48px;" class="animate-in">
+      <div>
+        <div class="section-tag">📚 ידע שעושה סדר</div>
+        <h2 class="section-title">מרכז <span>הידע</span></h2>
+        <p class="section-subtitle" style="margin-top:12px;">כל מה שצריך לדעת לפני שקונים, מוכרים או שוכרים</p>
+      </div>
+      <button class="btn-secondary">לכל המאמרים ←</button>
+    </div>
+    <div class="articles-grid">
+      <div class="article-card animate-in delay-1">
+        <div class="article-img green">
+          🏠
+          <span class="article-category buyers">לרוכשים</span>
+        </div>
+        <div class="article-body">
+          <div class="article-meta">
+            <span class="article-date">📅 יוני 2026</span>
+            <span class="article-read">⏱️ 2 דקות קריאה</span>
+          </div>
+          <h3 class="article-title">המדריך המלא לרכישת דירה ראשונה</h3>
+          <p class="article-excerpt">דירה ראשונה היא הרבה יותר ממחיר ומשכנתא. ריכזנו את כל השלבים בסדר הנכון, כדי שתתקדמו בביטחון ובלי הפתעות בדרך.</p>
+          <a href="#" class="article-link">קרא עוד ←</a>
+        </div>
+      </div>
+      <div class="article-card animate-in delay-2">
+        <div class="article-img blue">
+          💰
+          <span class="article-category sellers">למוכרים</span>
+        </div>
+        <div class="article-body">
+          <div class="article-meta">
+            <span class="article-date">📅 מאי 2026</span>
+            <span class="article-read">⏱️ 1 דקה קריאה</span>
+          </div>
+          <h3 class="article-title">המדריך למפרסם הפרטי: איך לתמחר את הדירה נכון</h3>
+          <p class="article-excerpt">מחיר אחד מפריד בין דירה שנמכרת מהר לבין דירה שתקועה חודשים. ככה מוצאים את הנקודה המדויקת.</p>
+          <a href="#" class="article-link">קרא עוד ←</a>
+        </div>
+      </div>
+      <div class="article-card animate-in delay-3">
+        <div class="article-img yellow">
+          🔑
+          <span class="article-category brokers">למתווכים</span>
+        </div>
+        <div class="article-body">
+          <div class="article-meta">
+            <span class="article-date">📅 אפריל 2026</span>
+            <span class="article-read">⏱️ 1 דקה קריאה</span>
+          </div>
+          <h3 class="article-title">איך מקבלים לידים איכותיים במקום טלפונים מיותרים</h3>
+          <p class="article-excerpt">עשרות שיחות ביום, רובן מסקרנים בלבד. ככה עוברים ל"לידים שבאמת מובילים לעסקאות.</p>
+          <a href="#" class="article-link">קרא עוד ←</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BANNER -->
+<section class="cta-banner" id="post">
+  <div class="cta-content animate-in">
+    <div class="section-tag" style="background:rgba(46,196,182,0.2);color:#7ee8e0;margin-bottom:24px;">🚀 מוכנים להתחיל?</div>
+    <h2 class="cta-title">מוכרים או משכירים דירה?</h2>
+    <p class="cta-subtitle">ברגע שהמודעה עולה, המערכת שולחת התראה מיידית לאלפי משתמשים שמחפשים בדיוק את מה שיש לכם. אל תחכו שימצאו אתכם — תנו לנו לחבר אתכם לקונים הרציניים ביותר.</p>
+    <div class="cta-buttons">
+      <button class="btn-gold" style="font-size:19px;padding:18px 40px;">📋 פרסום דירה עכשיו — בחינם ←</button>
+      <button class="btn-secondary" style="color:rgba(255,255,255,0.8);border-color:rgba(255,255,255,0.35);" onclick="scrollToSection('brokers')">למתווכים ←</button>
+    </div>
+    <p style="margin-top:20px;font-size:14px;color:rgba(255,255,255,0.5);">✓ ללא עלות  ✓ תוך 2 דקות  ✓ חשיפה לאלפי מחפשים</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="footer-logo">
+          <div class="logo-icon">ד</div>
+          <span class="logo-text">דירת<span style="color:var(--teal);">א</span></span>
+        </div>
+        <p class="footer-desc">דירתא — הבית של רוכשי ושוכרי הדירות בקהילה החרדית. הפלטפורמה החכמה שמחברת בין קונים, שוכרים, מתווכים ומפרסמים בצורה הכי מדויקת שיש.</p>
+        <div class="footer-contact">
+          <a href="tel:0777778000">📞 077-777-8000</a>
+          <a href="mailto:office@dirata.co.il">✉️ office@dirata.co.il</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-title">מחפשים דירה</div>
+        <ul class="footer-links">
+          <li><a href="#">מאגר דירות למכירה</a></li>
+          <li><a href="#">מאגר דירות להשכרה</a></li>
+          <li><a href="#">הרשמה לקבלת התראות</a></li>
+          <li><a href="#">אזור אישי</a></li>
+          <li><a href="#">חיפוש על מפה</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">מפרסמים ומתווכים</div>
+        <ul class="footer-links">
+          <li><a href="#">פרסום דירה</a></li>
+          <li><a href="#">הצטרפות למערכת המתווכים</a></li>
+          <li><a href="#">כניסה לאזור מתווכים</a></li>
+          <li><a href="#">מחירון וחבילות פרסום</a></li>
+          <li><a href="#">שאלות למתווכים</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">מידע ותמיכה</div>
+        <ul class="footer-links">
+          <li><a href="#">איך זה עובד?</a></li>
+          <li><a href="#">מרכז המאמרים</a></li>
+          <li><a href="#">שאלות ותשובות</a></li>
+          <li><a href="#">יצירת קשר</a></li>
+          <li><a href="#">האנשים מאחורי דירתא</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 דירתא. כל הזכויות שמורות.</span>
+      <div class="footer-bottom-links">
+        <a href="#">מדיניות פרטיות</a>
+        <a href="#">תקנון</a>
+        <a href="#">הצהרת נגישות</a>
+        <a href="#">מפת אתר</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- FLOATING BUTTON -->
+<button class="floating-cta" onclick="scrollToSection('post')">
+  📋 פרסמו דירה בחינם
+</button>
+<script>
+// NAVBAR SCROLL
+window.addEventListener('scroll', () => {
+  const navbar = document.getElementById('navbar');
+  if (window.scrollY > 50) {
+    navbar.classList.add('scrolled');
+  } else {
+    navbar.classList.remove('scrolled');
+  }
+});
+
+// SCROLL TO SECTION
+function scrollToSection(id) {
+  const el = document.getElementById(id);
+  if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+function scrollToTop() {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// SEARCH TABS
+function setTab(btn, type) {
+  document.querySelectorAll('.search-tab').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+}
+
+// FAQ TOGGLE
+function toggleFaq(questionEl) {
+  const item = questionEl.parentElement;
+  const isOpen = item.classList.contains('open');
+  document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+  if (!isOpen) item.classList.add('open');
+}
+
+// SCROLL ANIMATIONS
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.15 });
+document.querySelectorAll('.animate-in').forEach(el => observer.observe(el));
+
+// PROPERTY SAVE TOGGLE
+document.querySelectorAll('.property-save').forEach(btn => {
+  btn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    btn.textContent = btn.textContent === '♡' ? '♥' : '♡';
+    btn.style.color = btn.textContent === '♥' ? '#ef4444' : '';
+  });
+});
+
+// POPULAR TAGS CLICK
+document.querySelectorAll('.popular-tag').forEach(tag => {
+  tag.addEventListener('click', () => {
+    document.querySelectorAll('.popular-tag').forEach(t => t.style.background = '');
+    tag.style.background = 'rgba(46,196,182,0.15)';
+    tag.style.borderColor = 'var(--teal)';
+    tag.style.color = 'var(--teal-dark)';
+  });
+});
+
+// SMOOTH HERO ENTRANCE
+window.addEventListener('load', () => {
+  document.querySelectorAll('.animate-in').forEach((el, i) => {
+    setTimeout(() => {
+      el.classList.add('visible');
+    }, i * 120);
+  });
+});
+
+// NUMBER COUNTER ANIMATION
+function animateCounter(el, target, suffix = '') {
+  let current = 0;
+  const increment = target / 60;
+  const timer = setInterval(() => {
+    current += increment;
+    if (current >= target) {
+      current = target;
+      clearInterval(timer);
+    }
+    el.textContent = Math.floor(current).toLocaleString('he-IL') + suffix;
+  }, 25);
+}
+const statObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const nums = entry.target.querySelectorAll('.stat-num-big');
+      nums.forEach(num => {
+        const text = num.textContent;
+        if (text.includes('12K')) animateCounter(num, 12, 'K+');
+        else if (text.includes('98')) animateCounter(num, 98, '%');
+        else if (text.includes('500')) animateCounter(num, 500, '+');
+      });
+      statObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.5 });
+const statsSection = document.querySelector('.stats-section');
+if (statsSection) statObserver.observe(statsSection);
+</script>
+</body>
+</html>
