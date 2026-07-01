@@ -3,444 +3,663 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="דירתא - הפלטפורמה החכמה לחיפוש ופרסום דירות בקהילה החרדית. מצאו את הדירה הבאה שלכם בקלות ובמהירות.">
 <title>דירתא | הדירה הבאה שלך מחכה לך</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; font-size: 16px; }
+body { font-family: 'Assistant', -apple-system, sans-serif; direction: rtl; color: #111827; background: #fff; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+a { text-decoration: none; color: inherit; }
+button { font-family: inherit; cursor: pointer; border: none; outline: none; }
+img { max-width: 100%; display: block; }
+
+/* ── TOKENS ── */
 :root {
-  --navy: #0d1f3c;
-  --navy-mid: #1a2e5a;
-  --teal: #2ec4b6;
-  --teal-dark: #21a699;
-  --gold: #f4a142;
-  --gold-dark: #e8931e;
-  --cream: #f8f6f2;
-  --white: #ffffff;
-  --gray-light: #f0f4f8;
-  --gray-mid: #e2e8f0;
-  --gray: #94a3b8;
-  --text-dark: #0d1f3c;
-  --text-mid: #334155;
-  --text-light: #64748b;
-  --radius: 16px;
-  --radius-lg: 24px;
-  --shadow: 0 4px 24px rgba(13,31,60,0.08);
-  --shadow-lg: 0 20px 60px rgba(13,31,60,0.15);
-  --transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
+  --navy:    #0B1F3A;
+  --navy2:   #132848;
+  --teal:    #00BFA5;
+  --teal2:   #00A693;
+  --gold:    #F5A623;
+  --gold2:   #E8941A;
+  --sand:    #F7F4EF;
+  --border:  #E5E7EB;
+  --text1:   #111827;
+  --text2:   #374151;
+  --text3:   #6B7280;
+  --text4:   #9CA3AF;
+  --white:   #FFFFFF;
+  --r-sm:    10px;
+  --r-md:    16px;
+  --r-lg:    24px;
+  --r-xl:    32px;
+  --shadow1: 0 1px 3px rgba(0,0,0,.08), 0 1px 2px rgba(0,0,0,.06);
+  --shadow2: 0 4px 16px rgba(0,0,0,.08), 0 2px 4px rgba(0,0,0,.04);
+  --shadow3: 0 20px 60px rgba(0,0,0,.12), 0 8px 24px rgba(0,0,0,.06);
 }
-*{margin:0;padding:0;box-sizing:border-box;}
-html{scroll-behavior:smooth;}
-body{font-family:'Assistant',sans-serif;direction:rtl;color:var(--text-dark);overflow-x:hidden;line-height:1.6;background:var(--white);}
-a{text-decoration:none;color:inherit;}
-img{max-width:100%;height:auto;}
-.container{max-width:1200px;margin:0 auto;padding:0 24px;}
-.btn-primary{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,var(--teal),var(--teal-dark));color:var(--white);padding:14px 32px;border-radius:50px;font-size:17px;font-weight:700;border:none;cursor:pointer;transition:var(--transition);box-shadow:0 4px 20px rgba(46,196,182,0.4);}
-.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(46,196,182,0.5);}
-.btn-secondary{display:inline-flex;align-items:center;gap:8px;background:transparent;color:var(--navy-mid);padding:13px 28px;border-radius:50px;font-size:16px;font-weight:600;border:2px solid var(--navy-mid);cursor:pointer;transition:var(--transition);}
-.btn-secondary:hover{background:var(--navy-mid);color:var(--white);}
-.btn-gold{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,var(--gold),var(--gold-dark));color:var(--white);padding:16px 36px;border-radius:50px;font-size:18px;font-weight:800;border:none;cursor:pointer;transition:var(--transition);box-shadow:0 4px 20px rgba(244,161,66,0.4);}
-.btn-gold:hover{transform:translateY(-3px);box-shadow:0 12px 40px rgba(244,161,66,0.5);}
-.section-tag{display:inline-block;background:linear-gradient(135deg,rgba(46,196,182,0.12),rgba(46,196,182,0.06));color:var(--teal-dark);padding:6px 18px;border-radius:50px;font-size:14px;font-weight:700;letter-spacing:0.5px;border:1px solid rgba(46,196,182,0.25);margin-bottom:16px;}
-.section-title{font-size:clamp(28px,4vw,48px);font-weight:900;line-height:1.15;color:var(--navy);}
-.section-title span{background:linear-gradient(135deg,var(--teal),var(--teal-dark));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
-.section-subtitle{font-size:18px;color:var(--text-light);font-weight:400;max-width:600px;line-height:1.7;}
-</style><style>
-/* NAVBAR */
-.navbar{position:fixed;top:0;left:0;right:0;z-index:1000;transition:var(--transition);}
-.navbar-inner{display:flex;align-items:center;justify-content:space-between;padding:18px 40px;transition:var(--transition);}
-.navbar.scrolled .navbar-inner{background:rgba(255,255,255,0.96);backdrop-filter:blur(20px);padding:12px 40px;box-shadow:0 2px 20px rgba(13,31,60,0.08);}
-.navbar-logo{display:flex;align-items:center;gap:10px;cursor:pointer;}
-.logo-icon{width:44px;height:44px;background:linear-gradient(135deg,var(--teal),var(--navy-mid));border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:900;color:white;}
-.logo-text{font-size:26px;font-weight:900;color:var(--navy);}
-.logo-text span{color:var(--teal);}
-.navbar-links{display:flex;align-items:center;gap:8px;}
-.navbar-links a{padding:8px 16px;border-radius:50px;font-size:15px;font-weight:600;color:var(--text-mid);transition:var(--transition);}
-.navbar-links a:hover{color:var(--navy);background:rgba(46,196,182,0.1);}
-.navbar-actions{display:flex;align-items:center;gap:12px;}
-.nav-btn-outline{padding:9px 20px;border-radius:50px;border:2px solid var(--navy-mid);color:var(--navy-mid);font-size:14px;font-weight:700;cursor:pointer;transition:var(--transition);background:transparent;}
-.nav-btn-outline:hover{background:var(--navy-mid);color:white;}
-.nav-btn-primary{padding:10px 22px;border-radius:50px;background:linear-gradient(135deg,var(--teal),var(--teal-dark));color:white;font-size:14px;font-weight:700;cursor:pointer;transition:var(--transition);border:none;box-shadow:0 3px 15px rgba(46,196,182,0.35);}
-.nav-btn-primary:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(46,196,182,0.45);}
-/* HERO */
-.hero{min-height:100vh;background:linear-gradient(160deg,#0d1f3c 0%,#1a3a6b 40%,#0d3353 70%,#0a2040 100%);position:relative;display:flex;align-items:center;overflow:hidden;}
-.hero::before{content:'';position:absolute;inset:0;background:url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 900"><defs><radialGradient id="g1" cx="30%" cy="40%"><stop offset="0%" stop-color="%232ec4b6" stop-opacity="0.15"/><stop offset="100%" stop-color="transparent"/></radialGradient><radialGradient id="g2" cx="80%" cy="60%"><stop offset="0%" stop-color="%23f4a142" stop-opacity="0.1"/><stop offset="100%" stop-color="transparent"/></radialGradient></defs><rect fill="url(%23g1)" width="1440" height="900"/><rect fill="url(%23g2)" width="1440" height="900"/></svg>');background-size:cover;}
-.hero-dots{position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,0.04) 1px,transparent 1px);background-size:40px 40px;}
-.hero-content{position:relative;z-index:2;max-width:1200px;margin:0 auto;padding:0 40px;width:100%;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;}
-.hero-text{}
-.hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(46,196,182,0.15);border:1px solid rgba(46,196,182,0.3);padding:8px 18px;border-radius:50px;color:#7ee8e0;font-size:14px;font-weight:600;margin-bottom:24px;}
-.hero-badge::before{content:'✨';}
-.hero-title{font-size:clamp(42px,5.5vw,72px);font-weight:900;line-height:1.05;color:white;margin-bottom:20px;}
-.hero-title .accent{background:linear-gradient(135deg,#2ec4b6,#7ee8e0);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
-.hero-title .gold{background:linear-gradient(135deg,#f4a142,#ffd166);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
-.hero-subtitle{font-size:19px;color:rgba(255,255,255,0.75);line-height:1.7;margin-bottom:32px;max-width:520px;}
-.hero-ctas{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:48px;}
-.hero-stats{display:flex;gap:40px;}
-.stat-item{text-align:center;}
-.stat-num{font-size:32px;font-weight:900;color:var(--teal);display:block;}
-.stat-label{font-size:13px;color:rgba(255,255,255,0.6);font-weight:500;}
-.hero-visual{position:relative;}
-.hero-card{background:rgba(255,255,255,0.06);backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,0.12);border-radius:var(--radius-lg);overflow:hidden;}
-.hero-card-header{background:rgba(46,196,182,0.15);padding:20px 24px;border-bottom:1px solid rgba(255,255,255,0.08);}
-.hero-card-header h3{color:white;font-size:18px;font-weight:700;}
-.hero-card-header p{color:rgba(255,255,255,0.6);font-size:13px;}
-.property-list{padding:20px;}
-.property-item{display:flex;gap:16px;padding:16px;border-radius:12px;background:rgba(255,255,255,0.04);margin-bottom:12px;transition:var(--transition);cursor:pointer;border:1px solid rgba(255,255,255,0.06);}
-.property-item:hover{background:rgba(46,196,182,0.1);border-color:rgba(46,196,182,0.2);}
-.property-item:last-child{margin-bottom:0;}
-.prop-img{width:60px;height:60px;border-radius:10px;background:linear-gradient(135deg,rgba(46,196,182,0.3),rgba(46,196,182,0.1));display:flex;align-items:center;justify-content:center;font-size:28px;flex-shrink:0;}
-.prop-details{flex:1;}
-.prop-title{color:white;font-size:15px;font-weight:700;margin-bottom:4px;}
-.prop-location{color:rgba(255,255,255,0.5);font-size:13px;margin-bottom:6px;}
-.prop-price{color:var(--teal);font-size:18px;font-weight:800;}
-.prop-rooms{color:rgba(255,255,255,0.4);font-size:12px;}
-.prop-badge{display:inline-block;background:rgba(244,161,66,0.2);color:#ffd166;padding:3px 10px;border-radius:50px;font-size:11px;font-weight:700;}
-.notification-pill{background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);border-radius:60px;padding:14px 20px;display:flex;align-items:center;gap:12px;margin-top:12px;}
-.notif-icon{width:36px;height:36px;background:linear-gradient(135deg,var(--gold),var(--gold-dark));border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;}
-.notif-text{flex:1;}
-.notif-title{color:white;font-size:13px;font-weight:700;}
-.notif-sub{color:rgba(255,255,255,0.5);font-size:11px;}
-.notif-time{color:var(--teal);font-size:12px;font-weight:600;}
-</style><style>
-/* SEARCH SECTION */
-.search-section{padding:80px 0;background:var(--cream);}
-.search-box{background:white;border-radius:var(--radius-lg);padding:40px;box-shadow:var(--shadow-lg);max-width:900px;margin:0 auto;}
-.search-tabs{display:flex;gap:8px;margin-bottom:32px;background:var(--gray-light);padding:6px;border-radius:50px;}
-.search-tab{flex:1;padding:12px 24px;border-radius:50px;font-size:16px;font-weight:700;border:none;cursor:pointer;transition:var(--transition);color:var(--text-light);background:transparent;}
-.search-tab.active{background:var(--navy-mid);color:white;box-shadow:0 3px 12px rgba(26,46,90,0.25);}
-.search-fields{display:grid;grid-template-columns:1fr 1fr 1fr auto;gap:16px;align-items:end;}
-.field-group{display:flex;flex-direction:column;gap:6px;}
-.field-group label{font-size:13px;font-weight:700;color:var(--text-mid);text-transform:uppercase;letter-spacing:0.5px;}
-.field-group select,.field-group input{padding:14px 18px;border:2px solid var(--gray-mid);border-radius:12px;font-size:16px;font-family:'Assistant',sans-serif;background:var(--gray-light);color:var(--text-dark);transition:var(--transition);appearance:none;cursor:pointer;}
-.field-group select:focus,.field-group input:focus{outline:none;border-color:var(--teal);background:white;box-shadow:0 0 0 4px rgba(46,196,182,0.1);}
-.search-btn{padding:14px 32px;background:linear-gradient(135deg,var(--teal),var(--teal-dark));color:white;border:none;border-radius:12px;font-size:17px;font-weight:800;cursor:pointer;transition:var(--transition);white-space:nowrap;box-shadow:0 4px 15px rgba(46,196,182,0.35);}
-.search-btn:hover{transform:translateY(-2px);box-shadow:0 8px 25px rgba(46,196,182,0.45);}
-.popular-searches{display:flex;align-items:center;gap:12px;margin-top:20px;flex-wrap:wrap;}
-.popular-searches span{font-size:13px;color:var(--text-light);font-weight:600;}
-.popular-tag{display:inline-block;padding:6px 14px;background:var(--gray-light);border-radius:50px;font-size:13px;color:var(--text-mid);cursor:pointer;transition:var(--transition);border:1px solid var(--gray-mid);}
-.popular-tag:hover{background:rgba(46,196,182,0.1);border-color:var(--teal);color:var(--teal-dark);}
-/* HOW IT WORKS */
-.how-section{padding:100px 0;background:white;}
-.section-header{text-align:center;margin-bottom:64px;}
-.steps-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:40px;position:relative;}
-.steps-grid::before{content:'';position:absolute;top:50px;right:16.67%;left:16.67%;height:2px;background:linear-gradient(90deg,var(--teal),var(--navy-mid));opacity:0.2;}
-.step-card{text-align:center;position:relative;}
-.step-num{width:80px;height:80px;border-radius:50%;background:linear-gradient(135deg,var(--teal),var(--teal-dark));display:flex;align-items:center;justify-content:center;font-size:28px;font-weight:900;color:white;margin:0 auto 24px;position:relative;box-shadow:0 8px 30px rgba(46,196,182,0.35);z-index:2;}
-.step-num::after{content:'';position:absolute;inset:-8px;border-radius:50%;border:2px solid rgba(46,196,182,0.2);}
-.step-icon{font-size:36px;margin-bottom:12px;}
-.step-title{font-size:22px;font-weight:800;color:var(--navy);margin-bottom:12px;}
-.step-desc{font-size:16px;color:var(--text-light);line-height:1.7;}
-/* FEATURES */
-.features-section{padding:100px 0;background:linear-gradient(160deg,var(--navy) 0%,var(--navy-mid) 100%);}
-.features-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:32px;margin-top:64px;}
-.feature-card{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:var(--radius-lg);padding:36px;transition:var(--transition);}
-.feature-card:hover{background:rgba(255,255,255,0.08);transform:translateY(-4px);border-color:rgba(46,196,182,0.3);}
-.feature-card.highlight{background:linear-gradient(135deg,rgba(46,196,182,0.15),rgba(46,196,182,0.05));border-color:rgba(46,196,182,0.3);}
-.feature-icon{width:64px;height:64px;border-radius:16px;background:linear-gradient(135deg,rgba(46,196,182,0.2),rgba(46,196,182,0.08));display:flex;align-items:center;justify-content:center;font-size:30px;margin-bottom:20px;border:1px solid rgba(46,196,182,0.2);}
-.feature-title{font-size:22px;font-weight:800;color:white;margin-bottom:12px;}
-.feature-desc{font-size:16px;color:rgba(255,255,255,0.65);line-height:1.7;}
-.feature-list{margin-top:16px;list-style:none;}
-.feature-list li{display:flex;align-items:center;gap:10px;color:rgba(255,255,255,0.7);font-size:14px;margin-bottom:8px;}
-.feature-list li::before{content:'✓';color:var(--teal);font-weight:900;font-size:16px;flex-shrink:0;}
-/* PROPERTIES SHOWCASE */
-.properties-section{padding:100px 0;background:var(--cream);}
-.properties-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin-top:48px;}
-.property-card{background:white;border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow);transition:var(--transition);}
-.property-card:hover{transform:translateY(-6px);box-shadow:var(--shadow-lg);}
-.property-img{height:220px;background:linear-gradient(135deg,#e2e8f0,#cbd5e1);position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;font-size:80px;}
-.property-img.blue{background:linear-gradient(135deg,#dbeafe,#bfdbfe);}
-.property-img.green{background:linear-gradient(135deg,#dcfce7,#bbf7d0);}
-.property-img.orange{background:linear-gradient(135deg,#fef3c7,#fde68a);}
-.property-type-badge{position:absolute;top:16px;right:16px;background:var(--navy);color:white;padding:5px 14px;border-radius:50px;font-size:12px;font-weight:700;}
-.property-type-badge.rent{background:var(--teal-dark);}
-.property-type-badge.new{background:var(--gold-dark);}
-.property-save{position:absolute;top:16px;left:16px;width:36px;height:36px;background:rgba(255,255,255,0.9);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px;cursor:pointer;transition:var(--transition);}
-.property-save:hover{background:white;transform:scale(1.1);}
-.property-body{padding:24px;}
-.property-meta{display:flex;gap:16px;margin-bottom:12px;}
-.property-meta span{display:flex;align-items:center;gap:4px;font-size:13px;color:var(--text-light);}
-.property-title{font-size:19px;font-weight:800;color:var(--navy);margin-bottom:6px;}
-.property-location{font-size:14px;color:var(--text-light);margin-bottom:16px;display:flex;align-items:center;gap:4px;}
-.property-price-row{display:flex;align-items:center;justify-content:space-between;padding-top:16px;border-top:1px solid var(--gray-mid);}
-.property-price{font-size:22px;font-weight:900;color:var(--navy);}
-.property-price span{font-size:14px;font-weight:500;color:var(--text-light);}
-.property-cta{padding:10px 20px;background:linear-gradient(135deg,var(--teal),var(--teal-dark));color:white;border:none;border-radius:50px;font-size:14px;font-weight:700;cursor:pointer;transition:var(--transition);}
-.property-cta:hover{transform:translateY(-1px);box-shadow:0 4px 15px rgba(46,196,182,0.35);}
-/* TESTIMONIALS */
-.testimonials-section{padding:100px 0;background:white;}
-.testimonials-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin-top:48px;}
-.testimonial-card{background:var(--cream);border-radius:var(--radius-lg);padding:32px;border:1px solid var(--gray-mid);transition:var(--transition);position:relative;}
-.testimonial-card::before{content:'"';position:absolute;top:20px;right:28px;font-size:80px;color:var(--teal);opacity:0.15;font-family:Georgia,serif;line-height:1;}
-.testimonial-card:hover{transform:translateY(-4px);box-shadow:var(--shadow);}
-.testimonial-stars{display:flex;gap:4px;margin-bottom:16px;}
-.star{color:var(--gold);}
-.testimonial-text{font-size:16px;color:var(--text-mid);line-height:1.75;margin-bottom:20px;font-style:italic;}
-.testimonial-author{display:flex;align-items:center;gap:12px;}
-.author-avatar{width:48px;height:48px;border-radius:50%;background:linear-gradient(135deg,var(--teal),var(--navy-mid));display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:900;color:white;}
-.author-name{font-size:16px;font-weight:800;color:var(--navy);}
-.author-city{font-size:13px;color:var(--text-light);}
-/* STATS SECTION */
-.stats-section{padding:80px 0;background:linear-gradient(135deg,var(--teal) 0%,var(--teal-dark) 100%);}
-.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:40px;text-align:center;}
-.stat-card{}
-.stat-num-big{font-size:54px;font-weight:900;color:white;line-height:1;margin-bottom:8px;}
-.stat-num-big span{font-size:32px;}
-.stat-label-big{font-size:17px;color:rgba(255,255,255,0.8);font-weight:600;}
-/* BROKERS */
-.brokers-section{padding:100px 0;background:var(--navy);}
-.brokers-inner{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;}
-.brokers-benefits{list-style:none;margin:32px 0;}
-.broker-benefit{display:flex;align-items:flex-start;gap:16px;margin-bottom:24px;}
-.benefit-icon{width:48px;height:48px;border-radius:12px;background:rgba(46,196,182,0.15);border:1px solid rgba(46,196,182,0.25);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;}
-.benefit-text{}
-.benefit-title{font-size:18px;font-weight:800;color:white;margin-bottom:4px;}
-.benefit-desc{font-size:15px;color:rgba(255,255,255,0.6);line-height:1.6;}
-.broker-form{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.12);border-radius:var(--radius-lg);padding:40px;}
-.form-title{font-size:24px;font-weight:800;color:white;margin-bottom:8px;}
-.form-subtitle{font-size:15px;color:rgba(255,255,255,0.6);margin-bottom:28px;}
-.form-field{margin-bottom:16px;}
-.form-field label{display:block;font-size:13px;font-weight:700;color:rgba(255,255,255,0.7);margin-bottom:6px;}
-.form-field input,.form-field select{width:100%;padding:14px 18px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.15);border-radius:12px;color:white;font-size:15px;font-family:'Assistant',sans-serif;transition:var(--transition);}
-.form-field input::placeholder{color:rgba(255,255,255,0.35);}
-.form-field input:focus,.form-field select:focus{outline:none;border-color:var(--teal);background:rgba(255,255,255,0.09);}
-.form-field select option{background:var(--navy);color:white;}
-.form-grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
-.form-submit{width:100%;padding:16px;background:linear-gradient(135deg,var(--teal),var(--teal-dark));color:white;border:none;border-radius:12px;font-size:18px;font-weight:800;cursor:pointer;transition:var(--transition);margin-top:8px;box-shadow:0 4px 20px rgba(46,196,182,0.35);}
-.form-submit:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(46,196,182,0.45);}
-/* FAQ */
-.faq-section{padding:100px 0;background:var(--cream);}
-.faq-list{max-width:800px;margin:48px auto 0;}
-.faq-item{background:white;border-radius:var(--radius);margin-bottom:12px;overflow:hidden;border:1px solid var(--gray-mid);transition:var(--transition);}
-.faq-item.open{border-color:var(--teal);}
-.faq-question{display:flex;align-items:center;justify-content:space-between;padding:22px 28px;cursor:pointer;gap:16px;}
-.faq-q-text{font-size:18px;font-weight:700;color:var(--navy);}
-.faq-icon{width:32px;height:32px;border-radius:50%;background:var(--gray-light);display:flex;align-items:center;justify-content:center;font-size:18px;transition:var(--transition);flex-shrink:0;}
-.faq-item.open .faq-icon{background:var(--teal);color:white;transform:rotate(45deg);}
-.faq-answer{max-height:0;overflow:hidden;transition:max-height 0.4s ease;}
-.faq-item.open .faq-answer{max-height:300px;}
-.faq-answer-inner{padding:0 28px 24px;font-size:16px;color:var(--text-mid);line-height:1.75;}
-/* CTA BANNER */
-.cta-banner{padding:100px 0;background:linear-gradient(135deg,#0d1f3c 0%,#1a3a6b 50%,#0d3353 100%);position:relative;overflow:hidden;text-align:center;}
-.cta-banner::before{content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:radial-gradient(ellipse at center,rgba(46,196,182,0.1) 0%,transparent 70%);}
-.cta-content{position:relative;z-index:2;max-width:700px;margin:0 auto;}
-.cta-title{font-size:clamp(32px,4vw,56px);font-weight:900;color:white;margin-bottom:20px;}
-.cta-subtitle{font-size:19px;color:rgba(255,255,255,0.75);margin-bottom:40px;line-height:1.7;}
-.cta-buttons{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;}
-/* ARTICLES */
-.articles-section{padding:100px 0;background:white;}
-.articles-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin-top:48px;}
-.article-card{border-radius:var(--radius-lg);overflow:hidden;border:1px solid var(--gray-mid);transition:var(--transition);}
-.article-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg);border-color:transparent;}
-.article-img{height:200px;display:flex;align-items:center;justify-content:center;font-size:70px;position:relative;}
-.article-img.green{background:linear-gradient(135deg,#dcfce7,#a7f3d0);}
-.article-img.blue{background:linear-gradient(135deg,#dbeafe,#bfdbfe);}
-.article-img.yellow{background:linear-gradient(135deg,#fef9c3,#fef08a);}
-.article-category{position:absolute;bottom:16px;right:16px;padding:5px 14px;border-radius:50px;font-size:12px;font-weight:700;background:white;}
-.article-category.brokers{color:var(--navy);}
-.article-category.buyers{color:var(--teal-dark);}
-.article-category.sellers{color:var(--gold-dark);}
-.article-body{padding:24px;}
-.article-meta{display:flex;align-items:center;gap:12px;margin-bottom:12px;}
-.article-date{font-size:12px;color:var(--text-light);}
-.article-read{font-size:12px;color:var(--text-light);display:flex;align-items:center;gap:4px;}
-.article-title{font-size:18px;font-weight:800;color:var(--navy);margin-bottom:10px;line-height:1.4;}
-.article-excerpt{font-size:14px;color:var(--text-light);line-height:1.7;}
-.article-link{display:inline-flex;align-items:center;gap:6px;color:var(--teal-dark);font-weight:700;font-size:14px;margin-top:16px;}
-/* FOOTER */
-.footer{background:var(--navy);color:white;padding:80px 0 0;}
-.footer-top{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:60px;padding-bottom:60px;border-bottom:1px solid rgba(255,255,255,0.1);}
-.footer-brand{}
-.footer-logo{display:flex;align-items:center;gap:10px;margin-bottom:20px;}
-.footer-logo .logo-icon{background:linear-gradient(135deg,var(--teal),var(--navy-mid));}
-.footer-logo .logo-text{color:white;}
-.footer-desc{font-size:15px;color:rgba(255,255,255,0.6);line-height:1.75;margin-bottom:24px;max-width:320px;}
-.footer-contact a{display:flex;align-items:center;gap:8px;color:rgba(255,255,255,0.7);font-size:14px;margin-bottom:8px;transition:var(--transition);}
-.footer-contact a:hover{color:var(--teal);}
-.footer-col-title{font-size:15px;font-weight:800;color:white;margin-bottom:20px;letter-spacing:0.5px;}
-.footer-links{list-style:none;}
-.footer-links li{margin-bottom:10px;}
-.footer-links a{font-size:14px;color:rgba(255,255,255,0.6);transition:var(--transition);}
-.footer-links a:hover{color:var(--teal);}
-.footer-bottom{padding:24px 0;display:flex;align-items:center;justify-content:space-between;font-size:13px;color:rgba(255,255,255,0.4);}
-.footer-bottom-links{display:flex;gap:20px;}
-.footer-bottom-links a{color:rgba(255,255,255,0.4);transition:var(--transition);}
-.footer-bottom-links a:hover{color:rgba(255,255,255,0.7);}
-/* FLOATING ELEMENTS */
-.floating-cta{position:fixed;bottom:30px;left:30px;z-index:999;background:linear-gradient(135deg,var(--gold),var(--gold-dark));color:white;padding:14px 24px;border-radius:50px;font-size:15px;font-weight:800;box-shadow:0 8px 30px rgba(244,161,66,0.45);cursor:pointer;transition:var(--transition);display:flex;align-items:center;gap:8px;border:none;}
-.floating-cta:hover{transform:translateY(-3px);box-shadow:0 12px 40px rgba(244,161,66,0.55);}
-/* ALERT BANNER */
-.alert-banner{background:linear-gradient(135deg,rgba(46,196,182,0.12),rgba(46,196,182,0.06));border-bottom:1px solid rgba(46,196,182,0.2);padding:12px 40px;display:flex;align-items:center;justify-content:center;gap:12px;position:relative;z-index:999;}
-.alert-text{font-size:14px;font-weight:600;color:var(--navy-mid);}
-.alert-badge{background:var(--teal);color:white;padding:4px 12px;border-radius:50px;font-size:12px;font-weight:800;}
-.alert-link{color:var(--teal-dark);font-weight:700;font-size:14px;}
-/* SCROLL ANIMATIONS */
-.animate-in{opacity:0;transform:translateY(30px);transition:opacity 0.7s ease,transform 0.7s ease;}
-.animate-in.visible{opacity:1;transform:translateY(0);}
-.delay-1{transition-delay:0.1s;}
-.delay-2{transition-delay:0.2s;}
-.delay-3{transition-delay:0.3s;}
-/* RESPONSIVE */
-@media(max-width:1024px){
-  .hero-content{grid-template-columns:1fr;}
-  .hero-visual{display:none;}
-  .features-grid{grid-template-columns:1fr;}
-  .brokers-inner{grid-template-columns:1fr;}
+
+/* ── UTILITIES ── */
+.wrap { max-width: 1180px; margin: 0 auto; padding: 0 28px; }
+.tag {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 13px; font-weight: 700; letter-spacing: .4px;
+  padding: 5px 14px; border-radius: 50px;
 }
-@media(max-width:768px){
-  .navbar-links{display:none;}
-  .properties-grid,.testimonials-grid,.articles-grid{grid-template-columns:1fr;}
-  .stats-grid{grid-template-columns:repeat(2,1fr);}
-  .steps-grid{grid-template-columns:1fr;}
-  .steps-grid::before{display:none;}
-  .footer-top{grid-template-columns:1fr 1fr;}
-  .search-fields{grid-template-columns:1fr;gap:12px;}
-  .hero-stats{gap:24px;}
-  .hero-title{font-size:38px;}
+.tag--teal { background: rgba(0,191,165,.1); color: var(--teal2); border: 1px solid rgba(0,191,165,.2); }
+.tag--gold  { background: rgba(245,166,35,.12); color: var(--gold2); border: 1px solid rgba(245,166,35,.2); }
+.tag--navy  { background: rgba(11,31,58,.08);  color: var(--navy);  border: 1px solid rgba(11,31,58,.12); }
+
+.h1 { font-size: clamp(38px, 5.5vw, 68px); font-weight: 900; line-height: 1.08; letter-spacing: -.02em; }
+.h2 { font-size: clamp(28px, 3.5vw, 44px); font-weight: 800; line-height: 1.15; letter-spacing: -.01em; }
+.h3 { font-size: 22px; font-weight: 700; line-height: 1.3; }
+.body-lg { font-size: 18px; font-weight: 400; line-height: 1.7; color: var(--text3); }
+.body-md { font-size: 16px; font-weight: 400; line-height: 1.65; color: var(--text3); }
+
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  padding: 14px 28px; border-radius: 50px;
+  font-size: 16px; font-weight: 700; line-height: 1;
+  transition: all .2s ease; white-space: nowrap;
+}
+.btn--gold {
+  background: linear-gradient(135deg, var(--gold) 0%, var(--gold2) 100%);
+  color: #fff; box-shadow: 0 4px 20px rgba(245,166,35,.35);
+}
+.btn--gold:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(245,166,35,.45); }
+.btn--teal {
+  background: linear-gradient(135deg, var(--teal) 0%, var(--teal2) 100%);
+  color: #fff; box-shadow: 0 4px 20px rgba(0,191,165,.3);
+}
+.btn--teal:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(0,191,165,.4); }
+.btn--ghost {
+  background: rgba(255,255,255,.12); color: #fff;
+  border: 1.5px solid rgba(255,255,255,.3); backdrop-filter: blur(8px);
+}
+.btn--ghost:hover { background: rgba(255,255,255,.2); border-color: rgba(255,255,255,.5); }
+.btn--outline {
+  background: transparent; color: var(--navy);
+  border: 2px solid var(--border);
+}
+.btn--outline:hover { border-color: var(--navy); background: var(--navy); color: #fff; }
+.btn--lg { padding: 17px 36px; font-size: 18px; }
+.btn--sm { padding: 10px 20px; font-size: 14px; }
+
+/* fade-up animation */
+.fade { opacity: 0; transform: translateY(24px); transition: opacity .65s ease, transform .65s ease; }
+.fade.show { opacity: 1; transform: none; }
+.fade.d1 { transition-delay: .1s; }
+.fade.d2 { transition-delay: .2s; }
+.fade.d3 { transition-delay: .3s; }
+.fade.d4 { transition-delay: .4s; }
+
+/* ────────────────────────────────
+   TOPBAR
+──────────────────────────────── */
+.topbar {
+  background: linear-gradient(135deg, var(--teal2) 0%, var(--teal) 100%);
+  color: #fff; padding: 10px 0; text-align: center;
+  font-size: 14px; font-weight: 600; letter-spacing: .2px;
+}
+.topbar strong { font-weight: 800; }
+.topbar a { color: #fff; text-decoration: underline; margin-right: 12px; }
+
+/* ────────────────────────────────
+   NAVBAR
+──────────────────────────────── */
+.navbar {
+  position: sticky; top: 0; z-index: 900;
+  background: rgba(255,255,255,.95); backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
+  transition: box-shadow .25s ease;
+}
+.navbar.scrolled { box-shadow: 0 2px 20px rgba(0,0,0,.08); }
+.navbar__inner {
+  display: flex; align-items: center; gap: 0;
+  height: 68px;
+}
+.navbar__logo {
+  display: flex; align-items: center; gap: 10px;
+  font-size: 26px; font-weight: 900; color: var(--navy);
+  margin-left: 40px;
+}
+.navbar__logo-icon {
+  width: 40px; height: 40px; border-radius: 10px;
+  background: linear-gradient(135deg, var(--teal) 0%, var(--navy) 100%);
+  display: flex; align-items: center; justify-content: center;
+  color: #fff; font-size: 18px; font-weight: 900; flex-shrink: 0;
+}
+.navbar__logo span { color: var(--teal); }
+.navbar__links {
+  display: flex; align-items: center; gap: 2px; flex: 1;
+}
+.navbar__links a {
+  padding: 8px 14px; border-radius: var(--r-sm);
+  font-size: 15px; font-weight: 600; color: var(--text2);
+  transition: all .15s ease;
+}
+.navbar__links a:hover { color: var(--navy); background: var(--sand); }
+.navbar__actions { display: flex; align-items: center; gap: 10px; }
+.nav-alert {
+  display: flex; align-items: center; gap: 6px;
+  padding: 9px 16px; border-radius: 50px;
+  font-size: 14px; font-weight: 700; color: var(--text2);
+  border: 1.5px solid var(--border); transition: all .15s ease;
+  background: transparent;
+}
+.nav-alert:hover { border-color: var(--teal); color: var(--teal2); }
+.nav-post {
+  padding: 10px 20px; border-radius: 50px;
+  font-size: 14px; font-weight: 800; color: #fff;
+  background: linear-gradient(135deg, var(--navy) 0%, var(--navy2) 100%);
+  box-shadow: 0 3px 12px rgba(11,31,58,.25);
+  transition: all .2s ease;
+}
+.nav-post:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(11,31,58,.35); }
+
+/* ────────────────────────────────
+   HERO
+──────────────────────────────── */
+.hero {
+  position: relative; overflow: hidden;
+  background: linear-gradient(150deg, var(--navy) 0%, #0F2D50 45%, #0A2040 100%);
+  min-height: 92vh; display: flex; align-items: center;
+}
+/* Subtle grid pattern */
+.hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(rgba(0,191,165,.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,191,165,.05) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+/* glow orbs */
+.hero::after {
+  content: '';
+  position: absolute; inset: 0; pointer-events: none;
+  background:
+    radial-gradient(ellipse 700px 500px at 15% 50%, rgba(0,191,165,.12) 0%, transparent 70%),
+    radial-gradient(ellipse 500px 400px at 85% 30%, rgba(245,166,35,.08) 0%, transparent 70%);
+}
+.hero__inner {
+  position: relative; z-index: 2;
+  display: grid; grid-template-columns: 1fr 480px; gap: 64px; align-items: center;
+  padding: 100px 0 80px;
+}
+.hero__eyebrow {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(0,191,165,.15); border: 1px solid rgba(0,191,165,.25);
+  color: rgba(0,191,165,.9); padding: 7px 16px; border-radius: 50px;
+  font-size: 13px; font-weight: 700; margin-bottom: 24px;
+}
+.hero__title {
+  font-size: clamp(40px, 5.5vw, 70px); font-weight: 900;
+  line-height: 1.05; letter-spacing: -.025em;
+  color: #fff; margin-bottom: 22px;
+}
+.hero__title .line-teal {
+  background: linear-gradient(90deg, var(--teal) 0%, #4ECDC4 100%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+}
+.hero__title .line-gold {
+  background: linear-gradient(90deg, var(--gold) 0%, #FFD166 100%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+}
+.hero__sub {
+  font-size: 19px; line-height: 1.7;
+  color: rgba(255,255,255,.68); max-width: 520px; margin-bottom: 36px;
+}
+.hero__ctas { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 52px; }
+.hero__stats { display: flex; gap: 48px; }
+.hero__stat-num {
+  font-size: 32px; font-weight: 900; color: var(--teal);
+  display: block; line-height: 1;
+}
+.hero__stat-label { font-size: 13px; color: rgba(255,255,255,.5); font-weight: 500; margin-top: 4px; display: block; }
+
+/* Hero Card */
+.hero__card {
+  background: rgba(255,255,255,.07);
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: var(--r-xl); overflow: hidden;
+  backdrop-filter: blur(16px);
+}
+.hcard__top {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 20px 22px 16px;
+  border-bottom: 1px solid rgba(255,255,255,.08);
+}
+.hcard__title { font-size: 15px; font-weight: 800; color: #fff; }
+.hcard__sub { font-size: 12px; color: rgba(255,255,255,.45); margin-top: 2px; }
+.hcard__live {
+  display: flex; align-items: center; gap: 6px;
+  font-size: 12px; font-weight: 700; color: var(--teal);
+}
+.hcard__live-dot {
+  width: 8px; height: 8px; border-radius: 50%; background: var(--teal);
+  animation: pulse 1.8s infinite;
+}
+@keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.5;transform:scale(.8)} }
+
+.hcard__listings { padding: 12px; display: flex; flex-direction: column; gap: 8px; }
+.hcard__item {
+  display: flex; align-items: center; gap: 12px;
+  background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.07);
+  border-radius: var(--r-md); padding: 12px 14px;
+  cursor: pointer; transition: all .2s ease;
+}
+.hcard__item:hover { background: rgba(0,191,165,.1); border-color: rgba(0,191,165,.2); }
+.hcard__icon {
+  width: 44px; height: 44px; border-radius: 10px; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center; font-size: 22px;
+}
+.hcard__icon--blue  { background: rgba(96,165,250,.15); }
+.hcard__icon--green { background: rgba(52,211,153,.15); }
+.hcard__icon--amber { background: rgba(251,191,36,.15);  }
+.hcard__info { flex: 1; min-width: 0; }
+.hcard__name { font-size: 14px; font-weight: 700; color: #fff; margin-bottom: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.hcard__loc  { font-size: 12px; color: rgba(255,255,255,.45); }
+.hcard__price { font-size: 16px; font-weight: 900; color: var(--teal); white-space: nowrap; }
+.hcard__badge {
+  font-size: 10px; font-weight: 800; padding: 3px 9px; border-radius: 50px;
+  background: rgba(245,166,35,.2); color: #FFD166; white-space: nowrap;
+}
+
+.hcard__notif {
+  margin: 0 12px 12px;
+  background: rgba(0,191,165,.08); border: 1px solid rgba(0,191,165,.2);
+  border-radius: var(--r-md); padding: 13px 16px;
+  display: flex; align-items: center; gap: 12px;
+}
+.hcard__notif-bell {
+  width: 38px; height: 38px; border-radius: 50%; flex-shrink: 0;
+  background: linear-gradient(135deg, var(--gold) 0%, var(--gold2) 100%);
+  display: flex; align-items: center; justify-content: center; font-size: 18px;
+}
+.hcard__notif-t { font-size: 13px; font-weight: 700; color: #fff; }
+.hcard__notif-s { font-size: 11px; color: rgba(255,255,255,.45); margin-top: 2px; }
+.hcard__notif-time { font-size: 12px; font-weight: 700; color: var(--teal); margin-right: auto; }
+
+/* ────────────────────────────────
+   SEARCH BAR
+──────────────────────────────── */
+.search-bar-section { padding: 0 0 72px; background: var(--sand); }
+.search-bar-box {
+  background: #fff; border-radius: var(--r-xl);
+  box-shadow: 0 8px 40px rgba(0,0,0,.1), 0 2px 8px rgba(0,0,0,.06);
+  padding: 36px 36px 28px; margin-top: -48px; position: relative; z-index: 10;
+}
+.search-bar-box__header { text-align: center; margin-bottom: 28px; }
+.search-bar-box__title { font-size: 26px; font-weight: 800; color: var(--navy); margin-bottom: 4px; }
+.search-bar-box__sub { font-size: 15px; color: var(--text3); }
+.search-tabs {
+  display: inline-flex; background: var(--sand); border-radius: 50px;
+  padding: 4px; margin-bottom: 24px; gap: 4px;
+}
+.search-tab {
+  padding: 10px 24px; border-radius: 50px; font-size: 15px; font-weight: 700;
+  color: var(--text3); background: transparent; transition: all .2s ease;
+}
+.search-tab.active { background: var(--navy); color: #fff; box-shadow: 0 2px 10px rgba(11,31,58,.2); }
+.search-row { display: grid; grid-template-columns: 1fr 1fr 1fr auto; gap: 12px; align-items: end; }
+.sf { display: flex; flex-direction: column; gap: 6px; }
+.sf label { font-size: 12px; font-weight: 800; color: var(--text2); letter-spacing: .6px; text-transform: uppercase; }
+.sf select, .sf input {
+  padding: 13px 16px; border: 2px solid var(--border); border-radius: var(--r-sm);
+  font-size: 15px; font-family: inherit; color: var(--text1); background: var(--sand);
+  transition: all .2s ease; appearance: none; cursor: pointer;
+}
+.sf select:focus, .sf input:focus { outline: none; border-color: var(--teal); background: #fff; box-shadow: 0 0 0 4px rgba(0,191,165,.08); }
+.search-cta {
+  padding: 13px 28px; background: linear-gradient(135deg, var(--teal) 0%, var(--teal2) 100%);
+  color: #fff; border-radius: var(--r-sm); font-size: 16px; font-weight: 800;
+  box-shadow: 0 4px 16px rgba(0,191,165,.3); transition: all .2s ease; white-space: nowrap;
+}
+.search-cta:hover { transform: translateY(-1px); box-shadow: 0 8px 24px rgba(0,191,165,.4); }
+.search-hints { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+.search-hints__label { font-size: 13px; color: var(--text4); font-weight: 600; }
+.search-hint {
+  padding: 6px 14px; border-radius: 50px; border: 1.5px solid var(--border);
+  font-size: 13px; color: var(--text2); cursor: pointer; transition: all .15s ease;
+  font-weight: 600;
+}
+.search-hint:hover { border-color: var(--teal); color: var(--teal2); background: rgba(0,191,165,.05); }
+</style>
+/* ────────────────────────────────
+   HOW IT WORKS
+──────────────────────────────── */
+.how { padding: 96px 0; background: #fff; }
+.section-head { text-align: center; margin-bottom: 64px; }
+.section-head .tag { margin-bottom: 16px; }
+.section-head .h2 { color: var(--navy); margin-bottom: 14px; }
+.section-head .h2 em { font-style: normal; color: var(--teal2); }
+.section-head .body-lg { max-width: 560px; margin: 0 auto; }
+.steps { display: grid; grid-template-columns: repeat(3,1fr); gap: 0; position: relative; }
+.steps::before { content: ''; position: absolute; top: 40px; right: 16.67%; left: 16.67%; height: 1px; background: linear-gradient(90deg, var(--teal) 0%, var(--border) 100%); }
+.step { text-align: center; padding: 0 32px; }
+.step__num { width: 80px; height: 80px; border-radius: 50%; margin: 0 auto 28px; background: linear-gradient(135deg, var(--teal) 0%, var(--teal2) 100%); display: flex; align-items: center; justify-content: center; font-size: 28px; font-weight: 900; color: #fff; box-shadow: 0 8px 32px rgba(0,191,165,.3); position: relative; z-index: 2; }
+.step__icon { font-size: 32px; margin-bottom: 16px; }
+.step__title { font-size: 20px; font-weight: 800; color: var(--navy); margin-bottom: 12px; }
+.step__desc { font-size: 15px; line-height: 1.7; color: var(--text3); }
+.how__cta { text-align: center; margin-top: 52px; }
+/* ── FEATURES dark ── */
+.features { padding: 96px 0; background: linear-gradient(160deg, var(--navy) 0%, #132848 60%, #0A2040 100%); position: relative; overflow: hidden; }
+.features::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 600px 400px at 90% 10%, rgba(0,191,165,.1) 0%, transparent 60%); }
+.features .section-head .h2 { color: #fff; }
+.features .section-head .h2 em { color: var(--teal); }
+.features .section-head .body-lg { color: rgba(255,255,255,.6); }
+.features-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 20px; margin-top: 56px; position: relative; z-index: 2; }
+.feat { background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.08); border-radius: var(--r-lg); padding: 36px 32px; transition: all .25s ease; }
+.feat:hover { background: rgba(255,255,255,.07); transform: translateY(-4px); border-color: rgba(0,191,165,.25); }
+.feat--accent { background: rgba(0,191,165,.06); border-color: rgba(0,191,165,.2); }
+.feat__icon { width: 60px; height: 60px; border-radius: var(--r-sm); margin-bottom: 22px; background: rgba(0,191,165,.12); border: 1px solid rgba(0,191,165,.2); display: flex; align-items: center; justify-content: center; font-size: 28px; }
+.feat__title { font-size: 21px; font-weight: 800; color: #fff; margin-bottom: 12px; }
+.feat__desc { font-size: 15px; line-height: 1.7; color: rgba(255,255,255,.58); }
+.feat__list { margin-top: 20px; list-style: none; display: flex; flex-direction: column; gap: 10px; }
+.feat__list li { display: flex; align-items: center; gap: 10px; font-size: 14px; color: rgba(255,255,255,.65); }
+.feat__list li::before { content: ''; width: 16px; height: 16px; border-radius: 50%; background: rgba(0,191,165,.15); border: 1.5px solid var(--teal); display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; }
+/* ── PROPERTIES ── */
+.props { padding: 96px 0; background: var(--sand); }
+.props-header { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 48px; }
+.props-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; }
+.prop-card { background: #fff; border-radius: var(--r-lg); overflow: hidden; box-shadow: var(--shadow1); border: 1px solid var(--border); transition: all .25s ease; }
+.prop-card:hover { transform: translateY(-6px); box-shadow: var(--shadow3); border-color: transparent; }
+.prop-img { height: 210px; position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; }
+.prop-img--blue { background: linear-gradient(135deg, #DBEAFE 0%, #BFDBFE 100%); }
+.prop-img--green { background: linear-gradient(135deg, #D1FAE5 0%, #A7F3D0 100%); }
+.prop-img--yellow { background: linear-gradient(135deg, #FEF3C7 0%, #FDE68A 100%); }
+.prop-img__emoji { font-size: 72px; }
+.prop-badge { position: absolute; top: 14px; right: 14px; padding: 4px 12px; border-radius: 50px; font-size: 12px; font-weight: 800; }
+.prop-badge--sale { background: var(--navy); color: #fff; }
+.prop-badge--rent { background: var(--teal2); color: #fff; }
+.prop-badge--new { background: var(--gold2); color: #fff; }
+.prop-save { position: absolute; top: 14px; left: 14px; width: 34px; height: 34px; border-radius: 50%; background: rgba(255,255,255,.9); display: flex; align-items: center; justify-content: center; font-size: 17px; cursor: pointer; border: none; transition: all .15s ease; }
+.prop-save:hover { background: #fff; transform: scale(1.15); }
+.prop-body { padding: 22px 22px 20px; }
+.prop-meta { display: flex; gap: 14px; margin-bottom: 10px; }
+.prop-meta span { font-size: 13px; color: var(--text3); }
+.prop-title { font-size: 18px; font-weight: 800; color: var(--navy); margin-bottom: 6px; }
+.prop-loc { font-size: 13px; color: var(--text3); margin-bottom: 12px; }
+.prop-desc { font-size: 13px; color: var(--text4); line-height: 1.6; margin-bottom: 16px; }
+.prop-foot { display: flex; align-items: center; justify-content: space-between; padding-top: 16px; border-top: 1px solid var(--border); }
+.prop-price { font-size: 22px; font-weight: 900; color: var(--navy); }
+.prop-price sub { font-size: 13px; font-weight: 500; color: var(--text3); }
+.prop-cta { padding: 10px 20px; border-radius: 50px; font-size: 14px; font-weight: 800; color: #fff; background: linear-gradient(135deg, var(--teal) 0%, var(--teal2) 100%); transition: all .2s ease; border: none; cursor: pointer; }
+.prop-cta:hover { transform: translateY(-1px); box-shadow: 0 4px 14px rgba(0,191,165,.35); }
+/* ── STATS ── */
+.stats { padding: 64px 0; background: linear-gradient(135deg, var(--teal) 0%, var(--teal2) 100%); }
+.stats-grid { display: grid; grid-template-columns: repeat(4,1fr); }
+.stat-item { text-align: center; padding: 0 20px; }
+.stat-item + .stat-item { border-right: 1px solid rgba(255,255,255,.2); }
+.stat-num { font-size: 52px; font-weight: 900; color: #fff; line-height: 1; }
+.stat-lbl { font-size: 16px; color: rgba(255,255,255,.8); font-weight: 600; margin-top: 6px; }
+/* ── TESTIMONIALS ── */
+.testimonials { padding: 96px 0; background: #fff; }
+.testi-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; margin-top: 48px; }
+.testi-card { background: var(--sand); border: 1px solid var(--border); border-radius: var(--r-lg); padding: 32px 28px; transition: all .25s ease; }
+.testi-card:hover { transform: translateY(-4px); box-shadow: var(--shadow2); border-color: transparent; }
+.testi-stars { display: flex; gap: 3px; margin-bottom: 16px; }
+.testi-stars span { color: var(--gold); font-size: 18px; }
+.testi-text { font-size: 15px; line-height: 1.75; color: var(--text2); font-style: italic; margin-bottom: 22px; }
+.testi-author { display: flex; align-items: center; gap: 12px; }
+.testi-avatar { width: 46px; height: 46px; border-radius: 50%; flex-shrink: 0; background: linear-gradient(135deg, var(--teal) 0%, var(--navy) 100%); display: flex; align-items: center; justify-content: center; font-size: 20px; font-weight: 900; color: #fff; }
+.testi-name { font-size: 15px; font-weight: 800; color: var(--navy); }
+.testi-city { font-size: 13px; color: var(--text3); }
+/* ── BROKERS ── */
+.brokers { padding: 96px 0; background: linear-gradient(160deg, var(--navy) 0%, #0F2D50 100%); position: relative; overflow: hidden; }
+.brokers__inner { display: grid; grid-template-columns: 1fr 460px; gap: 80px; align-items: center; position: relative; z-index: 2; }
+.brokers__title { color: #fff; margin-bottom: 16px; }
+.brokers__title em { font-style: normal; color: var(--teal); }
+.brokers__sub { font-size: 17px; line-height: 1.7; color: rgba(255,255,255,.62); margin-bottom: 36px; }
+.broker-benefits { list-style: none; display: flex; flex-direction: column; gap: 22px; margin-bottom: 36px; }
+.bb { display: flex; align-items: flex-start; gap: 16px; }
+.bb__icon { width: 48px; height: 48px; border-radius: var(--r-sm); flex-shrink: 0; background: rgba(0,191,165,.1); border: 1px solid rgba(0,191,165,.2); display: flex; align-items: center; justify-content: center; font-size: 22px; }
+.bb__title { font-size: 17px; font-weight: 800; color: #fff; margin-bottom: 4px; }
+.bb__desc { font-size: 14px; line-height: 1.6; color: rgba(255,255,255,.55); }
+.broker-promo { display: flex; align-items: center; gap: 14px; background: rgba(245,166,35,.08); border: 1px solid rgba(245,166,35,.2); border-radius: var(--r-md); padding: 18px 22px; }
+.broker-promo__t { font-size: 15px; font-weight: 800; color: #fff; }
+.broker-promo__s { font-size: 13px; color: rgba(255,255,255,.5); }
+.broker-form { background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.1); border-radius: var(--r-xl); padding: 38px 34px; }
+.bform__title { font-size: 22px; font-weight: 800; color: #fff; margin-bottom: 6px; }
+.bform__sub { font-size: 14px; color: rgba(255,255,255,.5); margin-bottom: 26px; }
+.bform__row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.bfield { margin-bottom: 14px; }
+.bfield label { display: block; font-size: 12px; font-weight: 800; color: rgba(255,255,255,.6); letter-spacing: .5px; text-transform: uppercase; margin-bottom: 6px; }
+.bfield input, .bfield select { width: 100%; padding: 13px 16px; background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.12); border-radius: var(--r-sm); color: #fff; font-size: 15px; font-family: inherit; transition: all .2s ease; }
+.bfield input::placeholder { color: rgba(255,255,255,.3); }
+.bfield input:focus, .bfield select:focus { outline: none; border-color: var(--teal); background: rgba(255,255,255,.09); }
+.bfield select option { background: var(--navy); }
+.bform__submit { width: 100%; padding: 16px; border-radius: var(--r-sm); margin-top: 6px; font-size: 17px; font-weight: 800; color: #fff; background: linear-gradient(135deg, var(--teal) 0%, var(--teal2) 100%); box-shadow: 0 4px 20px rgba(0,191,165,.3); transition: all .2s ease; border: none; cursor: pointer; font-family: inherit; }
+.bform__submit:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(0,191,165,.45); }
+/* ── FAQ ── */
+.faq { padding: 96px 0; background: var(--sand); }
+.faq-list { max-width: 760px; margin: 48px auto 0; display: flex; flex-direction: column; gap: 10px; }
+.faq-item { background: #fff; border: 1px solid var(--border); border-radius: var(--r-md); overflow: hidden; transition: border-color .2s ease; }
+.faq-item.open { border-color: var(--teal); }
+.faq-q { display: flex; align-items: center; justify-content: space-between; padding: 20px 24px; cursor: pointer; gap: 16px; }
+.faq-q-text { font-size: 17px; font-weight: 700; color: var(--navy); }
+.faq-q-icon { width: 30px; height: 30px; border-radius: 50%; flex-shrink: 0; background: var(--sand); display: flex; align-items: center; justify-content: center; font-size: 20px; color: var(--text3); transition: all .3s ease; line-height: 1; }
+.faq-item.open .faq-q-icon { background: var(--teal); color: #fff; transform: rotate(45deg); }
+.faq-body { max-height: 0; overflow: hidden; transition: max-height .4s ease; }
+.faq-item.open .faq-body { max-height: 280px; }
+.faq-body-inner { padding: 4px 24px 22px; font-size: 15px; line-height: 1.75; color: var(--text2); }
+/* ── CTA ── */
+.cta-banner { padding: 96px 0; text-align: center; background: linear-gradient(150deg, #0B1F3A 0%, #0F2D50 50%, #0A2040 100%); position: relative; overflow: hidden; }
+.cta-banner::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 900px 500px at 50% 50%, rgba(0,191,165,.09) 0%, transparent 70%); }
+.cta-banner__inner { position: relative; z-index: 2; max-width: 660px; margin: 0 auto; }
+.cta-banner .h2 { color: #fff; margin-bottom: 18px; }
+.cta-banner .body-lg { color: rgba(255,255,255,.65); margin-bottom: 40px; max-width: 560px; margin-left: auto; margin-right: auto; }
+.cta-banner__btns { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+.cta-banner__perks { display: flex; gap: 24px; justify-content: center; margin-top: 24px; flex-wrap: wrap; }
+.cta-banner__perk { font-size: 14px; color: rgba(255,255,255,.5); }
+/* ── ARTICLES ── */
+.articles { padding: 96px 0; background: #fff; }
+.articles-header { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 48px; }
+.art-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; }
+.art-card { border: 1px solid var(--border); border-radius: var(--r-lg); overflow: hidden; transition: all .25s ease; }
+.art-card:hover { transform: translateY(-4px); box-shadow: var(--shadow3); border-color: transparent; }
+.art-img { height: 190px; display: flex; align-items: center; justify-content: center; font-size: 68px; position: relative; }
+.art-img--a { background: linear-gradient(135deg,#D1FAE5,#A7F3D0); }
+.art-img--b { background: linear-gradient(135deg,#DBEAFE,#BFDBFE); }
+.art-img--c { background: linear-gradient(135deg,#FEF9C3,#FDE68A); }
+.art-cat { position: absolute; bottom: 14px; right: 14px; padding: 4px 12px; border-radius: 50px; font-size: 11px; font-weight: 800; background: #fff; }
+.art-cat--buyers { color: var(--teal2); }
+.art-cat--sellers { color: var(--gold2); }
+.art-cat--brokers { color: var(--navy); }
+.art-body { padding: 22px; background: #fff; }
+.art-meta { display: flex; gap: 12px; margin-bottom: 10px; font-size: 12px; color: var(--text4); }
+.art-title { font-size: 17px; font-weight: 800; color: var(--navy); margin-bottom: 10px; line-height: 1.4; }
+.art-exc { font-size: 13px; line-height: 1.65; color: var(--text3); }
+.art-link { display: inline-flex; align-items: center; gap: 5px; color: var(--teal2); font-weight: 700; font-size: 13px; margin-top: 14px; }
+/* ── FOOTER ── */
+.footer { background: var(--navy); color: #fff; padding: 72px 0 0; }
+.footer-top { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 56px; padding-bottom: 56px; border-bottom: 1px solid rgba(255,255,255,.08); }
+.footer-logo { display: flex; align-items: center; gap: 10px; margin-bottom: 18px; font-size: 24px; font-weight: 900; }
+.footer-logo span { color: var(--teal); }
+.footer-desc { font-size: 14px; line-height: 1.75; color: rgba(255,255,255,.5); margin-bottom: 22px; max-width: 300px; }
+.footer-contact a { display: flex; align-items: center; gap: 8px; font-size: 14px; color: rgba(255,255,255,.6); margin-bottom: 8px; }
+.footer-contact a:hover { color: var(--teal); }
+.footer-col-title { font-size: 13px; font-weight: 800; color: rgba(255,255,255,.9); letter-spacing: .6px; text-transform: uppercase; margin-bottom: 18px; }
+.footer-links { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+.footer-links a { font-size: 14px; color: rgba(255,255,255,.5); }
+.footer-links a:hover { color: var(--teal); }
+.footer-bottom { display: flex; align-items: center; justify-content: space-between; padding: 22px 0; font-size: 13px; color: rgba(255,255,255,.35); }
+.footer-bottom-links { display: flex; gap: 20px; }
+.footer-bottom-links a { color: rgba(255,255,255,.35); }
+.footer-bottom-links a:hover { color: rgba(255,255,255,.6); }
+.floating-btn { position: fixed; bottom: 28px; left: 28px; z-index: 800; display: flex; align-items: center; gap: 8px; padding: 13px 22px; border-radius: 50px; font-size: 14px; font-weight: 800; color: #fff; background: linear-gradient(135deg, var(--gold) 0%, var(--gold2) 100%); box-shadow: 0 6px 28px rgba(245,166,35,.45); transition: all .2s ease; border: none; font-family: inherit; cursor: pointer; }
+.floating-btn:hover { transform: translateY(-3px); box-shadow: 0 12px 40px rgba(245,166,35,.55); }
+.fade { opacity: 0; transform: translateY(24px); transition: opacity .65s ease, transform .65s ease; }
+.fade.show { opacity: 1; transform: none; }
+.fade.d1 { transition-delay: .1s; } .fade.d2 { transition-delay: .2s; } .fade.d3 { transition-delay: .3s; } .fade.d4 { transition-delay: .4s; }
+@media (max-width: 1024px) {
+  .hero__inner { grid-template-columns: 1fr; }
+  .hero__card { display: none; }
+  .features-grid { grid-template-columns: 1fr; }
+  .brokers__inner { grid-template-columns: 1fr; }
+  .footer-top { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 768px) {
+  .navbar__links { display: none; }
+  .props-grid, .testi-grid, .art-grid { grid-template-columns: 1fr; }
+  .stats-grid { grid-template-columns: repeat(2,1fr); }
+  .steps { grid-template-columns: 1fr; }
+  .steps::before { display: none; }
+  .search-row { grid-template-columns: 1fr; }
+  .hero__stats { gap: 28px; }
+  .footer-top { grid-template-columns: 1fr; }
+  .bform__row { grid-template-columns: 1fr; }
 }
 </style>
-</head>
-<body>
-<!-- ALERT BANNER -->
-<div class="alert-banner">
-  <span class="alert-badge">🔥 חדש</span>
-  <span class="alert-text">תקופת השקה - פרסום דירות ב<strong>חינם לחלוטין</strong> למוכרים ומתווכים!</span>
-  <a href="#brokers" class="alert-link">לפרטים ←</a>
+</head><body>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  🔥 תקופת השקה — פרסום דירות <strong>בחינם לחלוטין</strong> למוכרים ומתווכים!
+  <a href="#brokers">לפרטים ←</a>
 </div>
 
 <!-- NAVBAR -->
-<nav class="navbar" id="navbar">
-  <div class="navbar-inner">
-    <div class="navbar-logo" onclick="scrollToTop()">
-      <div class="logo-icon">ד</div>
-      <span class="logo-text">דירת<span>א</span></span>
-    </div>
-    <div class="navbar-links">
+<header class="navbar" id="navbar">
+  <div class="wrap navbar__inner">
+    <a href="#" class="navbar__logo">
+      <div class="navbar__logo-icon">ד</div>
+      דירת<span>א</span>
+    </a>
+    <nav class="navbar__links">
       <a href="#how">איך זה עובד</a>
       <a href="#properties">דירות למכירה</a>
       <a href="#rent">דירות להשכרה</a>
       <a href="#brokers">למתווכים</a>
       <a href="#articles">מאמרים</a>
-    </div>
-    <div class="navbar-actions">
-      <button class="nav-btn-outline" onclick="scrollToSection('brokers')">🔔 התראות על דירות</button>
-      <button class="nav-btn-primary" onclick="scrollToSection('post')">פרסום בדירתא ←</button>
+    </nav>
+    <div class="navbar__actions">
+      <button class="nav-alert" onclick="goto('search')">🔔 התראות על דירות</button>
+      <button class="nav-post" onclick="goto('brokers')">פרסום בדירתא ←</button>
     </div>
   </div>
-</nav>
+</header>
 
 <!-- HERO -->
 <section class="hero">
-  <div class="hero-dots"></div>
-  <div class="hero-content">
-    <div class="hero-text animate-in">
-      <div class="hero-badge">הפלטפורמה החכמה לנדל"ן חרדי</div>
-      <h1 class="hero-title">
+  <div class="wrap hero__inner">
+    <div class="fade">
+      <div class="hero__eyebrow">✨ הפלטפורמה החכמה לנדל&quot;ן חרדי</div>
+      <h1 class="hero__title">
         דירה שמחפשים?<br>
-        <span class="accent">תפסיקו לרדוף.</span><br>
-        <span class="gold">היא תגיע אליכם.</span>
+        <span class="line-teal">תפסיקו לרדוף.</span><br>
+        <span class="line-gold">היא תגיע אליכם.</span>
       </h1>
-      <p class="hero-subtitle">המנוע החכם שלנו סורק בשבילכם 24/7 ושולח התראות מדויקות בזמן אמת — ישירות לנייד או למייל. ירושלים, בני ברק, בית שמש, אלעד ועוד.</p>
-      <div class="hero-ctas">
-        <button class="btn-gold" onclick="scrollToSection('search')">🔍 חפשו דירה עכשיו</button>
-        <button class="btn-secondary" style="color:rgba(255,255,255,0.8);border-color:rgba(255,255,255,0.3);" onclick="scrollToSection('how')">איך זה עובד?</button>
+      <p class="hero__sub">המנוע החכם שלנו סורק 24/7 ושולח התראות מדויקות בזמן אמת — ישירות לנייד או למייל. ירושלים, בני ברק, בית שמש, אלעד ועוד.</p>
+      <div class="hero__ctas">
+        <button class="btn btn--gold btn--lg" onclick="goto('search')">🔍 חפשו דירה עכשיו</button>
+        <button class="btn btn--ghost" onclick="goto('how')">איך זה עובד?</button>
       </div>
-      <div class="hero-stats">
-        <div class="stat-item">
-          <span class="stat-num">12,000+</span>
-          <span class="stat-label">דירות במאגר</span>
+      <div class="hero__stats">
+        <div>
+          <span class="hero__stat-num" data-count="12000">12,000+</span>
+          <span class="hero__stat-label">דירות במאגר</span>
         </div>
-        <div class="stat-item">
-          <span class="stat-num">98%</span>
-          <span class="stat-label">לידים רלוונטיים</span>
+        <div>
+          <span class="hero__stat-num">98%</span>
+          <span class="hero__stat-label">שביעות רצון</span>
         </div>
-        <div class="stat-item">
-          <span class="stat-num">3 דק'</span>
-          <span class="stat-label">עד לקבלת התראה</span>
+        <div>
+          <span class="hero__stat-num">3 דק'</span>
+          <span class="hero__stat-label">עד התראה</span>
         </div>
       </div>
     </div>
-    <div class="hero-visual animate-in delay-2">
-      <div class="hero-card">
-        <div class="hero-card-header">
-          <h3>🏠 דירות חמות להיום</h3>
-          <p>עודכן לפני 3 דקות</p>
+
+    <div class="hero__card fade d2">
+      <div class="hcard__top">
+        <div>
+          <div class="hcard__title">🏠 דירות חמות להיום</div>
+          <div class="hcard__sub">עודכן לפני 3 דקות</div>
         </div>
-        <div class="property-list">
-          <div class="property-item">
-            <div class="prop-img">🏢</div>
-            <div class="prop-details">
-              <div class="prop-title">4 חדרים - בית שמש רמה ג'</div>
-              <div class="prop-location">📍 רחוב נחל לכיש, שכונה ז'</div>
-              <div class="prop-price">₪1,450,000</div>
-            </div>
-            <div class="prop-badge">חדש!</div>
+        <div class="hcard__live">
+          <span class="hcard__live-dot"></span> Live
+        </div>
+      </div>
+      <div class="hcard__listings">
+        <div class="hcard__item">
+          <div class="hcard__icon hcard__icon--blue">🏢</div>
+          <div class="hcard__info">
+            <div class="hcard__name">4 חדרים — בית שמש רמה ג'</div>
+            <div class="hcard__loc">📍 נחל לכיש, שכונה ז'</div>
           </div>
-          <div class="property-item">
-            <div class="prop-img">🏘️</div>
-            <div class="prop-details">
-              <div class="prop-title">3 חדרים להשכרה - בני ברק</div>
-              <div class="prop-location">📍 רחוב רבי עקיבא, מרכז</div>
-              <div class="prop-price">₪5,200/חודש</div>
-            </div>
-            <div class="prop-badge">זמין</div>
-          </div>
-          <div class="property-item">
-            <div class="prop-img">🏗️</div>
-            <div class="prop-details">
-              <div class="prop-title">5 חדרים - ירושלים הר נוף</div>
-              <div class="prop-location">📍 שכונת הר נוף, חרדי</div>
-              <div class="prop-price">₪2,100,000</div>
-            </div>
-            <div class="prop-badge">חם!</div>
+          <div>
+            <div class="hcard__price">₪1,450,000</div>
+            <div class="hcard__badge">חדש!</div>
           </div>
         </div>
-        <div class="notification-pill">
-          <div class="notif-icon">🔔</div>
-          <div class="notif-text">
-            <div class="notif-title">התראה חדשה: 3 דירות תואמות לחיפוש שלכם!</div>
-            <div class="notif-sub">בית שמש • 4 חדרים • עד 1.6M</div>
+        <div class="hcard__item">
+          <div class="hcard__icon hcard__icon--green">🏘️</div>
+          <div class="hcard__info">
+            <div class="hcard__name">3 חדרים להשכרה — בני ברק</div>
+            <div class="hcard__loc">📍 רחוב רבי עקיבא, מרכז</div>
           </div>
-          <div class="notif-time">עכשיו</div>
+          <div>
+            <div class="hcard__price">₪5,200/חודש</div>
+            <div class="hcard__badge">זמין</div>
+          </div>
         </div>
+        <div class="hcard__item">
+          <div class="hcard__icon hcard__icon--amber">🏗️</div>
+          <div class="hcard__info">
+            <div class="hcard__name">5 חדרים — ירושלים הר נוף</div>
+            <div class="hcard__loc">📍 שכונת הר נוף, חרדי</div>
+          </div>
+          <div>
+            <div class="hcard__price">₪2,100,000</div>
+            <div class="hcard__badge">חם!</div>
+          </div>
+        </div>
+      </div>
+      <div class="hcard__notif">
+        <div class="hcard__notif-bell">🔔</div>
+        <div>
+          <div class="hcard__notif-t">3 דירות חדשות תואמות לחיפוש שלכם!</div>
+          <div class="hcard__notif-s">בית שמש • 4 חדרים • עד 1.6M</div>
+        </div>
+        <div class="hcard__notif-time">עכשיו</div>
       </div>
     </div>
   </div>
 </section>
-<!-- SEARCH SECTION -->
-<section class="search-section" id="search">
-  <div class="container">
-    <div style="text-align:center;margin-bottom:40px;">
-      <div class="section-tag">🔍 מנוע חיפוש חכם</div>
-      <h2 class="section-title">מצאו את הדירה <span>המושלמת</span></h2>
-      <p class="section-subtitle" style="margin:16px auto 0;">סנו לפי עיר, שכונה, מחיר וחדרים — ותנו למערכת לעשות את השאר</p>
-    </div>
-    <div class="search-box">
-      <div class="search-tabs">
-        <button class="search-tab active" onclick="setTab(this,'sale')">🏠 לקנות דירה</button>
-        <button class="search-tab" onclick="setTab(this,'rent')">🔑 לשכור דירה</button>
-        <button class="search-tab" onclick="setTab(this,'alert')">🔔 הגדרת התראה</button>
+
+<!-- SEARCH -->
+<section id="search" style="background:var(--sand);padding-bottom:80px;">
+  <div class="wrap">
+    <div class="search-bar-box fade">
+      <div class="search-bar-box__header">
+        <div class="search-bar-box__title">מצאו את הדירה המושלמת שלכם</div>
+        <div class="search-bar-box__sub">סנו לפי עיר, שכונה, מחיר וחדרים</div>
       </div>
-      <div class="search-fields">
-        <div class="field-group">
+      <div style="text-align:center;margin-bottom:20px;">
+        <div class="search-tabs">
+          <button class="search-tab active" onclick="setTab(this)">🏠 לקנות</button>
+          <button class="search-tab" onclick="setTab(this)">🔑 לשכור</button>
+          <button class="search-tab" onclick="setTab(this)">🔔 התראה</button>
+        </div>
+      </div>
+      <div class="search-row">
+        <div class="sf">
           <label>עיר</label>
           <select>
-            <option value="">כל הערים</option>
+            <option>כל הערים</option>
             <option>ירושלים</option>
             <option>בני ברק</option>
             <option>בית שמש</option>
             <option>אלעד</option>
             <option>מודיעין עילית</option>
             <option>ביתר עילית</option>
-            <option>אשדוד</option>
-            <option>פתח תקווה</option>
           </select>
         </div>
-        <div class="field-group">
-          <label>מספר חדרים</label>
+        <div class="sf">
+          <label>חדרים</label>
           <select>
-            <option value="">כל הגדלים</option>
-            <option>1-2 חדרים</option>
+            <option>כל הגדלים</option>
+            <option>1–2 חדרים</option>
             <option>3 חדרים</option>
             <option>3.5 חדרים</option>
             <option>4 חדרים</option>
@@ -448,113 +667,112 @@ img{max-width:100%;height:auto;}
             <option>5+ חדרים</option>
           </select>
         </div>
-        <div class="field-group">
-          <label>תקציב מקסימלי</label>
+        <div class="sf">
+          <label>תקציב</label>
           <select>
-            <option value="">ללא הגבלה</option>
-            <option>עד 800,000 ₪</option>
-            <option>עד 1,200,000 ₪</option>
-            <option>עד 1,600,000 ₪</option>
-            <option>עד 2,000,000 ₪</option>
-            <option>עד 2,500,000 ₪</option>
-            <option>מעל 2,500,000 ₪</option>
+            <option>ללא הגבלה</option>
+            <option>עד 800K ₪</option>
+            <option>עד 1.2M ₪</option>
+            <option>עד 1.6M ₪</option>
+            <option>עד 2M ₪</option>
+            <option>עד 2.5M ₪</option>
+            <option>מעל 2.5M ₪</option>
           </select>
         </div>
-        <button class="search-btn">🔍 חפש עכשיו</button>
+        <button class="search-cta">🔍 חיפוש</button>
       </div>
-      <div class="popular-searches">
-        <span>חיפושים פופולריים:</span>
-        <span class="popular-tag">4 חדרים בבית שמש</span>
-        <span class="popular-tag">3 חדרים בבני ברק</span>
-        <span class="popular-tag">ירושלים הר נוף</span>
-        <span class="popular-tag">מודיעין עילית</span>
-        <span class="popular-tag">קנייה עד 1.5M</span>
+      <div class="search-hints">
+        <span class="search-hints__label">חיפושים פופולריים:</span>
+        <span class="search-hint">4 חדרים בבית שמש</span>
+        <span class="search-hint">3 חדרים בבני ברק</span>
+        <span class="search-hint">הר נוף ירושלים</span>
+        <span class="search-hint">אלעד קנייה</span>
+        <span class="search-hint">עד 1.5M ₪</span>
       </div>
     </div>
   </div>
 </section>
-
 <!-- HOW IT WORKS -->
-<section class="how-section" id="how">
-  <div class="container">
-    <div class="section-header animate-in">
-      <div class="section-tag">⚡ תהליך פשוט</div>
-      <h2 class="section-title">ככה זה <span>עובד</span></h2>
-      <p class="section-subtitle" style="margin:16px auto 0;">3 צעדים פשוטים — ואתם בדרך לדירה הבאה שלכם</p>
+<section class="how" id="how">
+  <div class="wrap">
+    <div class="section-head fade">
+      <span class="tag tag--teal">⚡ תהליך פשוט</span>
+      <h2 class="h2">ככה זה <em>עובד</em></h2>
+      <p class="body-lg">3 צעדים — ואתם בדרך לדירה הבאה שלכם</p>
     </div>
-    <div class="steps-grid">
-      <div class="step-card animate-in delay-1">
-        <div class="step-num">1</div>
-        <div class="step-icon">🎯</div>
-        <h3 class="step-title">מגדירים ושומרים</h3>
-        <p class="step-desc">בוחרים עיר, שכונה, תקציב וגודל — לחיצה אחת על "שמור חיפוש" ואתם מפעילים את הסוכן הדיגיטלי האישי שלכם.</p>
+    <div class="steps">
+      <div class="step fade d1">
+        <div class="step__num">1</div>
+        <div class="step__icon">🎯</div>
+        <h3 class="step__title">מגדירים ושומרים</h3>
+        <p class="step__desc">עיר, שכונה, תקציב, מספר חדרים. לחיצה אחת על "שמור חיפוש" — ואתם מפעילים את הסוכן הדיגיטלי האישי שלכם.</p>
       </div>
-      <div class="step-card animate-in delay-2">
-        <div class="step-num">2</div>
-        <div class="step-icon">🤖</div>
-        <h3 class="step-title">המערכת עובדת</h3>
-        <p class="step-desc">המנוע שלנו סורק 24/7 ומסנן בקפידה. כשמישהו מעלה דירה שתואמת בדיוק לחיפוש שלכם — אנחנו יודעים מיידית.</p>
+      <div class="step fade d2">
+        <div class="step__num">2</div>
+        <div class="step__icon">🤖</div>
+        <h3 class="step__title">המערכת עובדת 24/7</h3>
+        <p class="step__desc">המנוע החכם שלנו סורק ומסנן בקפידה. כשמישהו מעלה דירה שתואמת לחיפוש שלכם — אנחנו יודעים מיידית.</p>
       </div>
-      <div class="step-card animate-in delay-3">
-        <div class="step-num">3</div>
-        <div class="step-icon">🔔</div>
-        <h3 class="step-title">מקבלים התראה</h3>
-        <p class="step-desc">בינגו! ההתראה מגיעה ישירות למייל, בשיחה קולית לטלפון הכשר, או בהודעה. אתם בין הראשונים ליצור קשר.</p>
+      <div class="step fade d3">
+        <div class="step__num">3</div>
+        <div class="step__icon">🔔</div>
+        <h3 class="step__title">מקבלים התראה</h3>
+        <p class="step__desc">ההתראה מגיעה למייל, בשיחה קולית לטלפון הכשר, או בהודעה. אתם בין הראשונים — לפני כולם.</p>
       </div>
     </div>
-    <div style="text-align:center;margin-top:48px;">
-      <button class="btn-primary" onclick="scrollToSection('search')">התחילו עכשיו — זה בחינם ←</button>
+    <div class="how__cta fade d4">
+      <button class="btn btn--teal btn--lg" onclick="goto('search')">התחילו עכשיו — זה בחינם ←</button>
     </div>
   </div>
 </section>
 
 <!-- FEATURES -->
-<section class="features-section">
-  <div class="container">
-    <div class="section-header animate-in" style="text-align:center;">
-      <div class="section-tag" style="background:rgba(46,196,182,0.15);color:#7ee8e0;">💎 המערכת החכמה</div>
-      <h2 class="section-title" style="color:white;">כל מה שהצלחה <span>דורשת</span></h2>
-      <p class="section-subtitle" style="color:rgba(255,255,255,0.7);margin:16px auto 0;">טכנולוגיה מתקדמת בשירות הקהילה החרדית</p>
+<section class="features">
+  <div class="wrap">
+    <div class="section-head fade">
+      <span class="tag tag--teal">💎 הטכנולוגיה שלנו</span>
+      <h2 class="h2">כל מה שהצלחה <em>דורשת</em></h2>
+      <p class="body-lg">פלטפורמה שנבנתה מאפס בשביל הקהילה החרדית</p>
     </div>
     <div class="features-grid">
-      <div class="feature-card highlight animate-in delay-1">
-        <div class="feature-icon">🎯</div>
-        <h3 class="feature-title">סינון חכם ומדויק</h3>
-        <p class="feature-desc">לא רק עיר — אלא שכונה ספציפית, מרחק מחיידר, קהילה מועדפת. הסינון שלנו ברמת רחוב.</p>
-        <ul class="feature-list">
+      <div class="feat feat--accent fade d1">
+        <div class="feat__icon">🎯</div>
+        <h3 class="feat__title">סינון ברמת רחוב</h3>
+        <p class="feat__desc">לא רק עיר — שכונה ספציפית, מרחק מחיידר, קהילה מועדפת. חיפוש ויזואלי על מפה לפי כתובת.</p>
+        <ul class="feat__list">
           <li>סינון לפי שכונה ורחוב</li>
           <li>חיפוש ויזואלי על מפה</li>
           <li>קרבה למוסדות חינוך</li>
           <li>סינון לפי קהילה ומנהג</li>
         </ul>
       </div>
-      <div class="feature-card animate-in delay-2">
-        <div class="feature-icon">📞</div>
-        <h3 class="feature-title">התראות לטלפון הכשר</h3>
-        <p class="feature-desc">לא דורשים מכם לגלול לוחות. שיחה קולית ישירות לנייד הכשר — מיד כשעולה דירה רלוונטית.</p>
-        <ul class="feature-list">
+      <div class="feat fade d2">
+        <div class="feat__icon">📞</div>
+        <h3 class="feat__title">התראות לטלפון הכשר</h3>
+        <p class="feat__desc">שיחה קולית ישירות לנייד הכשר — מיד כשעולה דירה רלוונטית. גם בלי גישה לאינטרנט.</p>
+        <ul class="feat__list">
           <li>שיחה קולית לטלפון כשר</li>
           <li>מייל עם כל הפרטים</li>
           <li>בחירת תדירות התראות</li>
           <li>ניהול ועדכון בקלות</li>
         </ul>
       </div>
-      <div class="feature-card animate-in delay-1">
-        <div class="feature-icon">⚡</div>
-        <h3 class="feature-title">ישר לעניין</h3>
-        <p class="feature-desc">לחיצה אחת מחברת אתכם ישירות למפרסם. ללא מתווכים מיותרים, ללא עיכובים.</p>
-        <ul class="feature-list">
+      <div class="feat fade d1">
+        <div class="feat__icon">⚡</div>
+        <h3 class="feat__title">ישר לעניין</h3>
+        <p class="feat__desc">לחיצה אחת מחברת אתכם ישירות למפרסם. ללא מתווכים מיותרים, ללא עיכובים מיותרים.</p>
+        <ul class="feat__list">
           <li>קשר ישיר עם המפרסם</li>
-          <li>כפתור "קבע סיור" מיידי</li>
+          <li>כפתור קביעת סיור מיידי</li>
           <li>מידע מלא על הדירה</li>
           <li>תמונות, תיאור ומחיר</li>
         </ul>
       </div>
-      <div class="feature-card animate-in delay-2">
-        <div class="feature-icon">🆓</div>
-        <h3 class="feature-title">לגמרי בחינם לרוכשים</h3>
-        <p class="feature-desc">השירות למחפשי דירות הוא בחינם לחלוטין. המטרה שלנו: שתמצאו את הדירה הבאה שלכם בקלות.</p>
-        <ul class="feature-list">
+      <div class="feat fade d2">
+        <div class="feat__icon">🆓</div>
+        <h3 class="feat__title">בחינם לגמרי לרוכשים</h3>
+        <p class="feat__desc">הרשמה, חיפוש, התראות — הכל בחינם. המטרה שלנו פשוטה: שתמצאו את הדירה הבאה שלכם.</p>
+        <ul class="feat__list">
           <li>הרשמה חינמית</li>
           <li>חיפוש ללא הגבלה</li>
           <li>התראות בחינם</li>
@@ -564,360 +782,259 @@ img{max-width:100%;height:auto;}
     </div>
   </div>
 </section>
-<!-- PROPERTIES SHOWCASE -->
-<section class="properties-section" id="properties">
-  <div class="container">
-    <div style="display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:48px;" class="animate-in">
+
+<!-- PROPERTIES -->
+<section class="props" id="properties">
+  <div class="wrap">
+    <div class="props-header fade">
       <div>
-        <div class="section-tag">🏠 דירות חמות</div>
-        <h2 class="section-title">נכסים <span>נבחרים</span></h2>
-        <p class="section-subtitle" style="margin-top:12px;">מהמאגר הכי עדכני ומדויק לקהילה החרדית</p>
+        <span class="tag tag--navy" style="margin-bottom:12px;display:inline-flex;">🏠 דירות נבחרות</span>
+        <h2 class="h2">נכסים <span style="color:var(--teal2);">חמים</span> עכשיו</h2>
+        <p class="body-md" style="margin-top:8px;">מהמאגר הכי עדכני לקהילה החרדית</p>
       </div>
-      <button class="btn-secondary" onclick="scrollToSection('search')">לכל הדירות ←</button>
+      <button class="btn btn--outline">לכל הדירות ←</button>
     </div>
-    <div class="properties-grid">
-      <div class="property-card animate-in delay-1">
-        <div class="property-img blue">
-          🏢
-          <span class="property-type-badge">למכירה</span>
-          <span class="property-save">♡</span>
+    <div class="props-grid">
+      <div class="prop-card fade d1">
+        <div class="prop-img prop-img--blue">
+          <span class="prop-img__emoji">🏢</span>
+          <span class="prop-badge prop-badge--sale">למכירה</span>
+          <button class="prop-save" onclick="toggleSave(this)">♡</button>
         </div>
-        <div class="property-body">
-          <div class="property-meta">
+        <div class="prop-body">
+          <div class="prop-meta">
             <span>🛏️ 4 חדרים</span>
-            <span>📐 110 מ"ר</span>
-            <span>🏗️ קומה 3</span>
+            <span>📐 110 מ&quot;ר</span>
+            <span>🏗️ קומה 3/8</span>
           </div>
-          <h3 class="property-title">דירת 4 חדרים מרווחת</h3>
-          <div class="property-location">📍 שכונת רמה ג', בית שמש</div>
-          <p style="font-size:13px;color:var(--text-light);margin-bottom:0;">מרפסת שמש, חניה, ממ"ד, קרוב לחיידר ובית כנסת. שכונה חרדית איכותית.</p>
-          <div class="property-price-row">
-            <div class="property-price">₪1,450,000 <span>כולל</span></div>
-            <button class="property-cta">פרטים ←</button>
+          <h3 class="prop-title">דירת 4 חדרים מרווחת עם מרפסת</h3>
+          <div class="prop-loc">📍 שכונת רמה ג', בית שמש</div>
+          <p class="prop-desc">מרפסת שמש, חניה תת-קרקעית, ממ"ד, קרוב לחיידר ובית כנסת.</p>
+          <div class="prop-foot">
+            <div class="prop-price">₪1,450,000</div>
+            <button class="prop-cta">פרטים ←</button>
           </div>
         </div>
       </div>
-      <div class="property-card animate-in delay-2">
-        <div class="property-img green">
-          🏘️
-          <span class="property-type-badge rent">להשכרה</span>
-          <span class="property-save">♡</span>
+      <div class="prop-card fade d2">
+        <div class="prop-img prop-img--green">
+          <span class="prop-img__emoji">🏘️</span>
+          <span class="prop-badge prop-badge--rent">להשכרה</span>
+          <button class="prop-save" onclick="toggleSave(this)">♡</button>
         </div>
-        <div class="property-body">
-          <div class="property-meta">
+        <div class="prop-body">
+          <div class="prop-meta">
             <span>🛏️ 3 חדרים</span>
-            <span>📐 85 מ"ר</span>
-            <span>🏗️ קומה 1</span>
+            <span>📐 85 מ&quot;ר</span>
+            <span>🏗️ קומה 1/6</span>
           </div>
-          <h3 class="property-title">דירה משופצת להשכרה</h3>
-          <div class="property-location">📍 רחוב רבי עקיבא, בני ברק</div>
-          <p style="font-size:13px;color:var(--text-light);margin-bottom:0;">משופצת לגמרי, מטבח חדש, נגישות מצוינת. ממש בלב בני ברק.</p>
-          <div class="property-price-row">
-            <div class="property-price">₪5,200 <span>/חודש</span></div>
-            <button class="property-cta">פרטים ←</button>
+          <h3 class="prop-title">דירה משופצת בלב בני ברק</h3>
+          <div class="prop-loc">📍 רחוב רבי עקיבא, בני ברק</div>
+          <p class="prop-desc">משופצת לגמרי, מטבח חדש, נגישות מצוינת, ממ"ד.</p>
+          <div class="prop-foot">
+            <div class="prop-price">₪5,200 <sub>/חודש</sub></div>
+            <button class="prop-cta">פרטים ←</button>
           </div>
         </div>
       </div>
-      <div class="property-card animate-in delay-3">
-        <div class="property-img orange">
-          🏗️
-          <span class="property-type-badge new">חדש מקבלן</span>
-          <span class="property-save">♡</span>
+      <div class="prop-card fade d3">
+        <div class="prop-img prop-img--yellow">
+          <span class="prop-img__emoji">🏗️</span>
+          <span class="prop-badge prop-badge--new">חדש מקבלן</span>
+          <button class="prop-save" onclick="toggleSave(this)">♡</button>
         </div>
-        <div class="property-body">
-          <div class="property-meta">
+        <div class="prop-body">
+          <div class="prop-meta">
             <span>🛏️ 5 חדרים</span>
-            <span>📐 130 מ"ר</span>
-            <span>🏗️ קומה 5</span>
+            <span>📐 130 מ&quot;ר</span>
+            <span>🏗️ קומה 5/5</span>
           </div>
-          <h3 class="property-title">פנטהאוז יוקרתי - הר נוף</h3>
-          <div class="property-location">📍 שכונת הר נוף, ירושלים</div>
-          <p style="font-size:13px;color:var(--text-light);margin-bottom:0;">נוף פנורמי לירושלים, גג פרטי, 2 חניות. שכונה חרדית יוקרתית.</p>
-          <div class="property-price-row">
-            <div class="property-price">₪2,800,000 <span>כולל</span></div>
-            <button class="property-cta">פרטים ←</button>
+          <h3 class="prop-title">פנטהאוז עם גג בהר נוף</h3>
+          <div class="prop-loc">📍 שכונת הר נוף, ירושלים</div>
+          <p class="prop-desc">נוף פנורמי, גג פרטי, 2 חניות. שכונה חרדית יוקרתית.</p>
+          <div class="prop-foot">
+            <div class="prop-price">₪2,800,000</div>
+            <button class="prop-cta">פרטים ←</button>
           </div>
         </div>
       </div>
     </div>
-    <div style="text-align:center;margin-top:40px;">
-      <button class="btn-primary" onclick="scrollToSection('search')">🔍 צפו בכל 12,000+ הדירות ←</button>
+    <div style="text-align:center;margin-top:40px;" class="fade d4">
+      <button class="btn btn--teal btn--lg">🔍 צפו בכל 12,000+ הדירות ←</button>
     </div>
   </div>
 </section>
 
 <!-- STATS -->
-<section class="stats-section">
-  <div class="container">
+<section class="stats">
+  <div class="wrap">
     <div class="stats-grid">
-      <div class="stat-card animate-in delay-1">
-        <div class="stat-num-big">12K<span>+</span></div>
-        <div class="stat-label-big">דירות במאגר</div>
+      <div class="stat-item fade d1">
+        <div class="stat-num">12K+</div>
+        <div class="stat-lbl">דירות במאגר</div>
       </div>
-      <div class="stat-card animate-in delay-2">
-        <div class="stat-num-big">98<span>%</span></div>
-        <div class="stat-label-big">שביעות רצון</div>
+      <div class="stat-item fade d2">
+        <div class="stat-num">98%</div>
+        <div class="stat-lbl">שביעות רצון</div>
       </div>
-      <div class="stat-card animate-in delay-3">
-        <div class="stat-num-big">3<span>דק'</span></div>
-        <div class="stat-label-big">עד קבלת התראה</div>
+      <div class="stat-item fade d3">
+        <div class="stat-num">3 דק'</div>
+        <div class="stat-lbl">עד קבלת התראה</div>
       </div>
-      <div class="stat-card animate-in delay-3">
-        <div class="stat-num-big">500<span>+</span></div>
-        <div class="stat-label-big">מתווכים פעילים</div>
+      <div class="stat-item fade d4">
+        <div class="stat-num">500+</div>
+        <div class="stat-lbl">מתווכים פעילים</div>
       </div>
     </div>
   </div>
 </section>
 
 <!-- TESTIMONIALS -->
-<section class="testimonials-section">
-  <div class="container">
-    <div class="section-header animate-in" style="text-align:center;">
-      <div class="section-tag">⭐ מה הלקוחות אומרים</div>
-      <h2 class="section-title">סיפורי <span>הצלחה</span></h2>
-      <p class="section-subtitle" style="margin:16px auto 0;">משפחות שמצאו את הדירה שלהן דרך דירתא</p>
+<section class="testimonials">
+  <div class="wrap">
+    <div class="section-head fade">
+      <span class="tag tag--gold">⭐ סיפורי הצלחה</span>
+      <h2 class="h2">מה הלקוחות <em style="color:var(--teal2);">אומרים</em></h2>
+      <p class="body-lg">משפחות שמצאו את הדירה שלהן דרך דירתא</p>
     </div>
-    <div class="testimonials-grid">
-      <div class="testimonial-card animate-in delay-1">
-        <div class="testimonial-stars">
-          <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
-        </div>
-        <p class="testimonial-text">אחרי חצי שנה של חיפוש מייאש בלוחות שונים, הגדרנו חיפוש בדירתא. תוך 4 ימים קיבלנו התראה על הדירה המושלמת שלנו בבית שמש. אנחנו כבר גרים שם!</p>
-        <div class="testimonial-author">
-          <div class="author-avatar">מ</div>
+    <div class="testi-grid">
+      <div class="testi-card fade d1">
+        <div class="testi-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+        <p class="testi-text">אחרי חצי שנה של חיפוש מייאש, הגדרנו חיפוש בדירתא. תוך 4 ימים קיבלנו התראה על הדירה המושלמת שלנו. אנחנו כבר גרים שם!</p>
+        <div class="testi-author">
+          <div class="testi-avatar">מ</div>
           <div>
-            <div class="author-name">משפחת שטרן</div>
-            <div class="author-city">📍 בית שמש רמה ג'</div>
+            <div class="testi-name">משפחת שטרן</div>
+            <div class="testi-city">📍 בית שמש רמה ג'</div>
           </div>
         </div>
       </div>
-      <div class="testimonial-card animate-in delay-2">
-        <div class="testimonial-stars">
-          <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
-        </div>
-        <p class="testimonial-text">כמתווך, דירתא שינתה לי את החיים. הלידים שמגיעים אלי עכשיו הם רציניים ממוקדים. הפסקתי לבזבז שעות על שיחות סרק — רק עסקאות אמיתיות!</p>
-        <div class="testimonial-author">
-          <div class="author-avatar">י</div>
+      <div class="testi-card fade d2">
+        <div class="testi-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+        <p class="testi-text">כמתווך, דירתא שינתה לי את החיים. הלידים שמגיעים אלי עכשיו הם רציניים בלבד. הפסקתי לבזבז שעות על שיחות סרק!</p>
+        <div class="testi-author">
+          <div class="testi-avatar">י</div>
           <div>
-            <div class="author-name">ר' יוסף לוי — מתווך</div>
-            <div class="author-city">📍 בני ברק, 12 שנות ניסיון</div>
+            <div class="testi-name">ר' יוסף לוי — מתווך</div>
+            <div class="testi-city">📍 בני ברק, 12 שנות ניסיון</div>
           </div>
         </div>
       </div>
-      <div class="testimonial-card animate-in delay-3">
-        <div class="testimonial-stars">
-          <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
-        </div>
-        <p class="testimonial-text">יש לי טלפון כשר ולא הייתי בטוח שזה יתאים לי. אבל ההתראה בשיחה קולית עבדה מושלם! קיבלתי שיחה, שמעתי את הפרטים, התקשרתי למפרסם — וזהו. דירה ביד!</p>
-        <div class="testimonial-author">
-          <div class="author-avatar">ד</div>
+      <div class="testi-card fade d3">
+        <div class="testi-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+        <p class="testi-text">יש לי טלפון כשר — חששתי שזה לא יתאים לי. אבל ההתראה בשיחה קולית עבדה מושלם! קיבלתי שיחה, שמעתי, התקשרתי. דירה ביד!</p>
+        <div class="testi-author">
+          <div class="testi-avatar">ד</div>
           <div>
-            <div class="author-name">ר' דוד גולדברג</div>
-            <div class="author-city">📍 ירושלים, שכן הנוף</div>
+            <div class="testi-name">ר' דוד גולדברג</div>
+            <div class="testi-city">📍 ירושלים, שכונת הר נוף</div>
           </div>
         </div>
       </div>
     </div>
   </div>
 </section>
-<!-- BROKERS SECTION -->
-<section class="brokers-section" id="brokers">
-  <div class="container">
-    <div class="brokers-inner">
-      <div class="animate-in">
-        <div class="section-tag" style="background:rgba(46,196,182,0.15);color:#7ee8e0;">🏆 למתווכים ומפרסמים</div>
-        <h2 class="section-title" style="color:white;">פחות בזבוז זמן.<br><span>יותר עסקאות.</span></h2>
-        <p style="font-size:18px;color:rgba(255,255,255,0.7);margin:20px 0 32px;line-height:1.7;">דירתא היא לא עוד לוח פרסום. זו המערכת החכמה שמשדכת את הדירות שלכם ישירות למחפשים הרציניים ביותר.</p>
-        <ul class="brokers-benefits">
-          <li class="broker-benefit">
-            <div class="benefit-icon">🎯</div>
-            <div class="benefit-text">
-              <div class="benefit-title">לידים חמים וממוקדים</div>
-              <div class="benefit-desc">סוף לטלפונים לא רלוונטיים. רק רוכשים ושוכרים שחיפשו בדיוק את מה שיש לכם.</div>
-            </div>
-          </li>
-          <li class="broker-benefit">
-            <div class="benefit-icon">📊</div>
-            <div class="benefit-text">
-              <div class="benefit-title">מרכז שליטה מתקדם</div>
-              <div class="benefit-desc">ניהול כל הנכסים, מעקב לידים, וסטטיסטיקות בזמן אמת — הכל ממקום אחד.</div>
-            </div>
-          </li>
-          <li class="broker-benefit">
-            <div class="benefit-icon">📣</div>
-            <div class="benefit-text">
-              <div class="benefit-title">חשיפה אקטיבית לאלפים</div>
-              <div class="benefit-desc">כל דירה שמפרסמים נשלחת בהתראה אקטיבית לאלפי מחפשים רלוונטיים באותו רגע.</div>
-            </div>
-          </li>
-          <li class="broker-benefit">
-            <div class="benefit-icon">💰</div>
-            <div class="benefit-text">
-              <div class="benefit-title">מנוי קבוע — אפס הפתעות</div>
-              <div class="benefit-desc">מודל פשוט ושקוף. אין עמלות על עסקאות. בחבילה שמתאימה לגודל המשרד שלכם.</div>
-            </div>
-          </li>
-        </ul>
-        <div style="background:rgba(46,196,182,0.1);border:1px solid rgba(46,196,182,0.25);border-radius:12px;padding:16px 20px;display:inline-flex;align-items:center;gap:12px;">
-          <span style="font-size:22px;">🎁</span>
-          <div>
-            <div style="color:white;font-size:15px;font-weight:800;">תקופת השקה: פרסום בחינם!</div>
-            <div style="color:rgba(255,255,255,0.6);font-size:13px;">הצטרפו עכשיו ולא תשלמו דבר עד סוף 2026</div>
-          </div>
+<!-- BROKERS -->
+<section class="brokers" id="brokers">
+  <div class="wrap brokers__inner">
+    <div class="fade">
+      <span class="tag tag--teal" style="margin-bottom:20px;">🏆 למתווכים ומפרסמים</span>
+      <h2 class="h2 brokers__title">פחות בזבוז זמן.<br><em>יותר עסקאות.</em></h2>
+      <p class="brokers__sub">דירתא היא לא עוד לוח פרסום. זו המערכת החכמה שמשדכת את הדירות שלכם ישירות למחפשים הרציניים ביותר.</p>
+      <ul class="broker-benefits">
+        <li class="bb">
+          <div class="bb__icon">🎯</div>
+          <div><div class="bb__title">לידים חמים וממוקדים</div><div class="bb__desc">סוף לטלפונים לא רלוונטיים. רק רוכשים ושוכרים שחיפשו בדיוק את מה שיש לכם.</div></div>
+        </li>
+        <li class="bb">
+          <div class="bb__icon">📊</div>
+          <div><div class="bb__title">מרכז שליטה מתקדם</div><div class="bb__desc">ניהול כל הנכסים, מעקב לידים וסטטיסטיקות בזמן אמת — הכל ממקום אחד.</div></div>
+        </li>
+        <li class="bb">
+          <div class="bb__icon">📣</div>
+          <div><div class="bb__title">חשיפה אקטיבית לאלפים</div><div class="bb__desc">כל דירה נשלחת בהתראה לאלפי מחפשים רלוונטיים ברגע שמפרסמים אותה.</div></div>
+        </li>
+        <li class="bb">
+          <div class="bb__icon">💰</div>
+          <div><div class="bb__title">מנוי קבוע — אפס הפתעות</div><div class="bb__desc">אין עמלות על עסקאות. חבילה שקופה שמתאימה לגודל המשרד שלכם.</div></div>
+        </li>
+      </ul>
+      <div class="broker-promo">
+        <div style="font-size:28px;">🎁</div>
+        <div>
+          <div class="broker-promo__t">תקופת השקה: פרסום בחינם לחלוטין!</div>
+          <div class="broker-promo__s">הצטרפו עכשיו ולא תשלמו דבר עד סוף 2026</div>
         </div>
       </div>
-      <div class="broker-form animate-in delay-2">
-        <div class="form-title">צרו קשר עכשיו</div>
-        <div class="form-subtitle">סוכן דירתא יחזור אליכם לבניית חבילה מושלמת</div>
-        <div class="form-grid-2">
-          <div class="form-field">
-            <label>שם מלא</label>
-            <input type="text" placeholder="ישראל ישראלי">
-          </div>
-          <div class="form-field">
-            <label>טלפון</label>
-            <input type="tel" placeholder="050-0000000">
-          </div>
-        </div>
-        <div class="form-field">
-          <label>כתובת מייל</label>
-          <input type="email" placeholder="name@office.co.il">
-        </div>
-        <div class="form-field">
-          <label>שם המשרד</label>
-          <input type="text" placeholder="משרד תיווך XYZ">
-        </div>
-        <div class="form-field">
-          <label>ערים בהן הארגון פועל</label>
-          <select>
-            <option>בחרו עיר</option>
-            <option>ירושלים</option>
-            <option>בני ברק</option>
-            <option>בית שמש</option>
-            <option>אלעד</option>
-            <option>מספר ערים</option>
-          </select>
-        </div>
-        <button class="form-submit">שלחו פרטים — נחזור מהר ←</button>
-        <p style="text-align:center;font-size:12px;color:rgba(255,255,255,0.4);margin-top:12px;">על ידי שליחה מאשרים את <a href="#" style="color:var(--teal);">תנאי השימוש</a></p>
+    </div>
+    <div class="broker-form fade d2">
+      <div class="bform__title">צרו קשר עכשיו</div>
+      <div class="bform__sub">סוכן דירתא יחזור אליכם לבניית חבילה מושלמת</div>
+      <div class="bform__row">
+        <div class="bfield"><label>שם מלא</label><input type="text" placeholder="ישראל ישראלי"></div>
+        <div class="bfield"><label>טלפון</label><input type="tel" placeholder="050-0000000"></div>
       </div>
+      <div class="bfield"><label>מייל</label><input type="email" placeholder="name@office.co.il"></div>
+      <div class="bfield"><label>שם המשרד</label><input type="text" placeholder="משרד תיווך XYZ"></div>
+      <div class="bfield">
+        <label>ערים עיקריות</label>
+        <select>
+          <option>בחרו עיר</option>
+          <option>ירושלים</option>
+          <option>בני ברק</option>
+          <option>בית שמש</option>
+          <option>אלעד</option>
+          <option>מספר ערים</option>
+        </select>
+      </div>
+      <button class="bform__submit">שלחו פרטים — נחזור מהר ←</button>
+      <p class="bform__fine">בלחיצה מאשרים את <a href="#">תנאי השימוש</a> ו<a href="#">מדיניות הפרטיות</a></p>
     </div>
   </div>
 </section>
 
 <!-- FAQ -->
-<section class="faq-section" id="faq">
-  <div class="container">
-    <div class="section-header animate-in" style="text-align:center;">
-      <div class="section-tag">❓ שאלות ותשובות</div>
-      <h2 class="section-title">כל מה שרציתם <span>לדעת</span></h2>
+<section class="faq" id="faq">
+  <div class="wrap">
+    <div class="section-head fade">
+      <span class="tag tag--navy">❓ שאלות ותשובות</span>
+      <h2 class="h2">כל מה שרציתם <em style="color:var(--teal2);">לדעת</em></h2>
     </div>
     <div class="faq-list">
       <div class="faq-item open">
-        <div class="faq-question" onclick="toggleFaq(this)">
-          <span class="faq-q-text">מה זה בעצם דירתא ואיך זה שונה מלוחות אחרים?</span>
-          <div class="faq-icon">+</div>
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <span class="faq-q-text">מה זה דירתא ואיך זה שונה מלוחות אחרים?</span>
+          <span class="faq-q-icon">+</span>
         </div>
-        <div class="faq-answer">
-          <div class="faq-answer-inner">דירתא היא פלטפורמת נדל"ן שמהפכת את תהליך חיפוש הדירה: במקום שאתם תסרקו לוחות שעות ביום — הדירות מגיעות אליכם. המנוע החכם שלנו עוקב ומתריע בזמן אמת, ברמת סינון של שכונה ורחוב. בנוסף, דירתא מתמקדת בקהילה החרדית — עם הבנה של שכונות, קהילות ומוסדות חינוך.</div>
-        </div>
+        <div class="faq-body"><div class="faq-body-inner">דירתא הופכת את תהליך חיפוש הדירה: במקום שאתם תסרקו לוחות שעות ביום — הדירות מגיעות אליכם. סינון ברמת שכונה ורחוב, התראות בזמן אמת, ומיקוד מלא בקהילה החרדית.</div></div>
       </div>
       <div class="faq-item">
-        <div class="faq-question" onclick="toggleFaq(this)">
-          <span class="faq-q-text">כמה עולה להשתמש בדירתא כמחפש דירה?</span>
-          <div class="faq-icon">+</div>
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <span class="faq-q-text">כמה עולה לחפש דירה דרך דירתא?</span>
+          <span class="faq-q-icon">+</span>
         </div>
-        <div class="faq-answer">
-          <div class="faq-answer-inner">למחפשי דירות — בחינם לחלוטין! הרשמה, חיפוש, שמירת חיפושים, וקבלת התראות — הכל ללא עלות. המטרה שלנו היא שתמצאו את הדירה הבאה שלכם.</div>
-        </div>
+        <div class="faq-body"><div class="faq-body-inner">למחפשי דירות — בחינם לחלוטין! הרשמה, חיפוש, שמירת חיפושים, קבלת התראות — הכל ללא עלות. אנחנו מרוויחים רק ממפרסמים ומתווכים.</div></div>
       </div>
       <div class="faq-item">
-        <div class="faq-question" onclick="toggleFaq(this)">
+        <div class="faq-q" onclick="toggleFaq(this)">
           <span class="faq-q-text">יש לי טלפון כשר — האם זה עובד עבורי?</span>
-          <div class="faq-icon">+</div>
+          <span class="faq-q-icon">+</span>
         </div>
-        <div class="faq-answer">
-          <div class="faq-answer-inner">בדיוק בשביל זה פיתחנו את מערכת ההתראות בשיחה קולית! אתם מגדירים את החיפוש (אפשר דרך בן/בת משפחה עם טלפון רגיל), ואנחנו מתקשרים אליכם לטלפון הכשר כשעולה דירה מתאימה.</div>
-        </div>
+        <div class="faq-body"><div class="faq-body-inner">בדיוק בשביל זה פיתחנו את מערכת ההתראות בשיחה קולית! מגדירים את החיפוש (אפשר דרך בן משפחה), ואנחנו מתקשרים לטלפון הכשר שלכם כשעולה דירה מתאימה.</div></div>
       </div>
       <div class="faq-item">
-        <div class="faq-question" onclick="toggleFaq(this)">
-          <span class="faq-q-text">אני עסוק — כמה התראות אקבל? אני לא רוצה הצפה.</span>
-          <div class="faq-icon">+</div>
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <span class="faq-q-text">אני עסוק — כמה התראות אקבל?</span>
+          <span class="faq-q-icon">+</span>
         </div>
-        <div class="faq-answer">
-          <div class="faq-answer-inner">השליטה בידיים שלכם! ניתן להגדיר התראה מיידית, או מרוכזת (פעם ביום/שבוע). גם ניתן לבחור מייל בלבד, שיחה קולית בלבד, או שניהם. ומכיבים ומפעילים בלחיצה.</div>
-        </div>
+        <div class="faq-body"><div class="faq-body-inner">השליטה בידיים שלכם! ניתן לקבוע התראה מיידית, מרוכזת (פעם ביום), ולבחור בין מייל לשיחה קולית. מכיבים ומפעילים בלחיצה.</div></div>
       </div>
       <div class="faq-item">
-        <div class="faq-question" onclick="toggleFaq(this)">
+        <div class="faq-q" onclick="toggleFaq(this)">
           <span class="faq-q-text">מי עומד מאחורי דירתא?</span>
-          <div class="faq-icon">+</div>
+          <span class="faq-q-icon">+</span>
         </div>
-        <div class="faq-answer">
-          <div class="faq-answer-inner">צוות של מומחים מובילים מתחומי הנדל"ן, הטכנולוגיה, האסטרטגיה והעיצוב הדיגיטלי. כולם מהקהילה, מכירים את הצרכים מבפנים, ומחויבים להציב סטנדרט חדש בשוק הנדל"ן החרדי.</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-<!-- ARTICLES -->
-<section class="articles-section" id="articles">
-  <div class="container">
-    <div style="display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:48px;" class="animate-in">
-      <div>
-        <div class="section-tag">📚 ידע שעושה סדר</div>
-        <h2 class="section-title">מרכז <span>הידע</span></h2>
-        <p class="section-subtitle" style="margin-top:12px;">כל מה שצריך לדעת לפני שקונים, מוכרים או שוכרים</p>
-      </div>
-      <button class="btn-secondary">לכל המאמרים ←</button>
-    </div>
-    <div class="articles-grid">
-      <div class="article-card animate-in delay-1">
-        <div class="article-img green">
-          🏠
-          <span class="article-category buyers">לרוכשים</span>
-        </div>
-        <div class="article-body">
-          <div class="article-meta">
-            <span class="article-date">📅 יוני 2026</span>
-            <span class="article-read">⏱️ 2 דקות קריאה</span>
-          </div>
-          <h3 class="article-title">המדריך המלא לרכישת דירה ראשונה</h3>
-          <p class="article-excerpt">דירה ראשונה היא הרבה יותר ממחיר ומשכנתא. ריכזנו את כל השלבים בסדר הנכון, כדי שתתקדמו בביטחון ובלי הפתעות בדרך.</p>
-          <a href="#" class="article-link">קרא עוד ←</a>
-        </div>
-      </div>
-      <div class="article-card animate-in delay-2">
-        <div class="article-img blue">
-          💰
-          <span class="article-category sellers">למוכרים</span>
-        </div>
-        <div class="article-body">
-          <div class="article-meta">
-            <span class="article-date">📅 מאי 2026</span>
-            <span class="article-read">⏱️ 1 דקה קריאה</span>
-          </div>
-          <h3 class="article-title">המדריך למפרסם הפרטי: איך לתמחר את הדירה נכון</h3>
-          <p class="article-excerpt">מחיר אחד מפריד בין דירה שנמכרת מהר לבין דירה שתקועה חודשים. ככה מוצאים את הנקודה המדויקת.</p>
-          <a href="#" class="article-link">קרא עוד ←</a>
-        </div>
-      </div>
-      <div class="article-card animate-in delay-3">
-        <div class="article-img yellow">
-          🔑
-          <span class="article-category brokers">למתווכים</span>
-        </div>
-        <div class="article-body">
-          <div class="article-meta">
-            <span class="article-date">📅 אפריל 2026</span>
-            <span class="article-read">⏱️ 1 דקה קריאה</span>
-          </div>
-          <h3 class="article-title">איך מקבלים לידים איכותיים במקום טלפונים מיותרים</h3>
-          <p class="article-excerpt">עשרות שיחות ביום, רובן מסקרנים בלבד. ככה עוברים ל"לידים שבאמת מובילים לעסקאות.</p>
-          <a href="#" class="article-link">קרא עוד ←</a>
-        </div>
+        <div class="faq-body"><div class="faq-body-inner">צוות של מומחים מהקהילה, מתחומי הנדל"ן, הטכנולוגיה, האסטרטגיה והעיצוב הדיגיטלי — מחויבים להציב סטנדרט חדש בשוק הנדל"ן החרדי.</div></div>
       </div>
     </div>
   </div>
@@ -925,181 +1042,179 @@ img{max-width:100%;height:auto;}
 
 <!-- CTA BANNER -->
 <section class="cta-banner" id="post">
-  <div class="cta-content animate-in">
-    <div class="section-tag" style="background:rgba(46,196,182,0.2);color:#7ee8e0;margin-bottom:24px;">🚀 מוכנים להתחיל?</div>
-    <h2 class="cta-title">מוכרים או משכירים דירה?</h2>
-    <p class="cta-subtitle">ברגע שהמודעה עולה, המערכת שולחת התראה מיידית לאלפי משתמשים שמחפשים בדיוק את מה שיש לכם. אל תחכו שימצאו אתכם — תנו לנו לחבר אתכם לקונים הרציניים ביותר.</p>
-    <div class="cta-buttons">
-      <button class="btn-gold" style="font-size:19px;padding:18px 40px;">📋 פרסום דירה עכשיו — בחינם ←</button>
-      <button class="btn-secondary" style="color:rgba(255,255,255,0.8);border-color:rgba(255,255,255,0.35);" onclick="scrollToSection('brokers')">למתווכים ←</button>
+  <div class="cta-banner__inner fade">
+    <span class="tag tag--teal" style="margin-bottom:24px;">🚀 מוכנים להתחיל?</span>
+    <h2 class="h2">מוכרים או משכירים דירה?</h2>
+    <p class="body-lg">ברגע שהמודעה עולה, המערכת שלנו שולחת התראה מיידית לאלפי משתמשים שמחפשים בדיוק את מה שיש לכם. תנו לנו לחבר אתכם לקונים הרציניים ביותר.</p>
+    <div class="cta-banner__btns">
+      <button class="btn btn--gold btn--lg">📋 פרסום דירה עכשיו — בחינם ←</button>
+      <button class="btn btn--ghost" onclick="goto('brokers')">למתווכים ←</button>
     </div>
-    <p style="margin-top:20px;font-size:14px;color:rgba(255,255,255,0.5);">✓ ללא עלות  ✓ תוך 2 דקות  ✓ חשיפה לאלפי מחפשים</p>
+    <div class="cta-banner__perks">
+      <span class="cta-banner__perk">✓ ללא עלות</span>
+      <span class="cta-banner__perk">✓ תוך 2 דקות</span>
+      <span class="cta-banner__perk">✓ חשיפה לאלפי מחפשים</span>
+    </div>
+  </div>
+</section>
+
+<!-- ARTICLES -->
+<section class="articles" id="articles">
+  <div class="wrap">
+    <div class="articles-header fade">
+      <div>
+        <span class="tag tag--teal" style="margin-bottom:12px;display:inline-flex;">📚 ידע שעושה סדר</span>
+        <h2 class="h2">מרכז <span style="color:var(--teal2);">הידע</span></h2>
+        <p class="body-md" style="margin-top:8px;">כל מה שצריך לפני שקונים, מוכרים או שוכרים</p>
+      </div>
+      <button class="btn btn--outline">לכל המאמרים ←</button>
+    </div>
+    <div class="art-grid">
+      <div class="art-card fade d1">
+        <div class="art-img art-img--a">🏠<span class="art-cat art-cat--buyers">לרוכשים</span></div>
+        <div class="art-body">
+          <div class="art-meta"><span>📅 יוני 2026</span><span>⏱️ 2 דק' קריאה</span></div>
+          <h3 class="art-title">המדריך המלא לרכישת דירה ראשונה</h3>
+          <p class="art-exc">כל השלבים בסדר הנכון — כדי שתתקדמו בביטחון ובלי הפתעות בדרך.</p>
+          <a href="#" class="art-link">קרא עוד →</a>
+        </div>
+      </div>
+      <div class="art-card fade d2">
+        <div class="art-img art-img--b">💰<span class="art-cat art-cat--sellers">למוכרים</span></div>
+        <div class="art-body">
+          <div class="art-meta"><span>📅 מאי 2026</span><span>⏱️ 1 דק' קריאה</span></div>
+          <h3 class="art-title">איך לתמחר את הדירה שלך נכון</h3>
+          <p class="art-exc">מחיר אחד מפריד בין דירה שנמכרת מהר לבין דירה שתקועה חודשים.</p>
+          <a href="#" class="art-link">קרא עוד →</a>
+        </div>
+      </div>
+      <div class="art-card fade d3">
+        <div class="art-img art-img--c">🔑<span class="art-cat art-cat--brokers">למתווכים</span></div>
+        <div class="art-body">
+          <div class="art-meta"><span>📅 אפריל 2026</span><span>⏱️ 1 דק' קריאה</span></div>
+          <h3 class="art-title">איך מקבלים לידים איכותיים</h3>
+          <p class="art-exc">עשרות שיחות ביום, רובן מסקרנים בלבד. ככה עוברים ללידים שמובילים לעסקאות.</p>
+          <a href="#" class="art-link">קרא עוד →</a>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
 <!-- FOOTER -->
 <footer class="footer">
-  <div class="container">
-    <div class="footer-top">
-      <div class="footer-brand">
-        <div class="footer-logo">
-          <div class="logo-icon">ד</div>
-          <span class="logo-text">דירת<span style="color:var(--teal);">א</span></span>
-        </div>
-        <p class="footer-desc">דירתא — הבית של רוכשי ושוכרי הדירות בקהילה החרדית. הפלטפורמה החכמה שמחברת בין קונים, שוכרים, מתווכים ומפרסמים בצורה הכי מדויקת שיש.</p>
-        <div class="footer-contact">
-          <a href="tel:0777778000">📞 077-777-8000</a>
-          <a href="mailto:office@dirata.co.il">✉️ office@dirata.co.il</a>
-        </div>
+  <div class="wrap footer-top">
+    <div class="footer-brand">
+      <div class="footer-logo">
+        <div class="navbar__logo-icon">ד</div>
+        דירת<span>א</span>
       </div>
-      <div>
-        <div class="footer-col-title">מחפשים דירה</div>
-        <ul class="footer-links">
-          <li><a href="#">מאגר דירות למכירה</a></li>
-          <li><a href="#">מאגר דירות להשכרה</a></li>
-          <li><a href="#">הרשמה לקבלת התראות</a></li>
-          <li><a href="#">אזור אישי</a></li>
-          <li><a href="#">חיפוש על מפה</a></li>
-        </ul>
-      </div>
-      <div>
-        <div class="footer-col-title">מפרסמים ומתווכים</div>
-        <ul class="footer-links">
-          <li><a href="#">פרסום דירה</a></li>
-          <li><a href="#">הצטרפות למערכת המתווכים</a></li>
-          <li><a href="#">כניסה לאזור מתווכים</a></li>
-          <li><a href="#">מחירון וחבילות פרסום</a></li>
-          <li><a href="#">שאלות למתווכים</a></li>
-        </ul>
-      </div>
-      <div>
-        <div class="footer-col-title">מידע ותמיכה</div>
-        <ul class="footer-links">
-          <li><a href="#">איך זה עובד?</a></li>
-          <li><a href="#">מרכז המאמרים</a></li>
-          <li><a href="#">שאלות ותשובות</a></li>
-          <li><a href="#">יצירת קשר</a></li>
-          <li><a href="#">האנשים מאחורי דירתא</a></li>
-        </ul>
+      <p class="footer-desc">הבית של רוכשי ושוכרי הדירות בקהילה החרדית. הפלטפורמה החכמה שמחברת בין קונים, שוכרים, מתווכים ומפרסמים.</p>
+      <div class="footer-contact">
+        <a href="tel:0777778000">📞 077-777-8000</a>
+        <a href="mailto:office@dirata.co.il">✉️ office@dirata.co.il</a>
       </div>
     </div>
-    <div class="footer-bottom">
-      <span>© 2026 דירתא. כל הזכויות שמורות.</span>
-      <div class="footer-bottom-links">
-        <a href="#">מדיניות פרטיות</a>
-        <a href="#">תקנון</a>
-        <a href="#">הצהרת נגישות</a>
-        <a href="#">מפת אתר</a>
-      </div>
+    <div>
+      <div class="footer-col-title">מחפשים דירה</div>
+      <ul class="footer-links">
+        <li><a href="#">דירות למכירה</a></li>
+        <li><a href="#">דירות להשכרה</a></li>
+        <li><a href="#">הרשמה לקבלת התראות</a></li>
+        <li><a href="#">אזור אישי</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">מפרסמים ומתווכים</div>
+      <ul class="footer-links">
+        <li><a href="#">פרסום דירה</a></li>
+        <li><a href="#">הצטרפות למתווכים</a></li>
+        <li><a href="#">כניסה לאזור מתווכים</a></li>
+        <li><a href="#">מחירון וחבילות</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">מידע ותמיכה</div>
+      <ul class="footer-links">
+        <li><a href="#">איך זה עובד?</a></li>
+        <li><a href="#">מרכז המאמרים</a></li>
+        <li><a href="#">שאלות ותשובות</a></li>
+        <li><a href="#">יצירת קשר</a></li>
+        <li><a href="#">האנשים מאחורינו</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="wrap footer-bottom">
+    <span>© 2026 דירתא. כל הזכויות שמורות.</span>
+    <div class="footer-bottom-links">
+      <a href="#">מדיניות פרטיות</a>
+      <a href="#">תקנון</a>
+      <a href="#">נגישות</a>
+      <a href="#">מפת אתר</a>
     </div>
   </div>
 </footer>
 
-<!-- FLOATING BUTTON -->
-<button class="floating-cta" onclick="scrollToSection('post')">
-  📋 פרסמו דירה בחינם
-</button>
+<!-- FLOATING CTA -->
+<button class="floating-btn" onclick="goto('post')">📋 פרסמו דירה בחינם</button>
+
 <script>
-// NAVBAR SCROLL
+// Navbar scroll effect
 window.addEventListener('scroll', () => {
-  const navbar = document.getElementById('navbar');
-  if (window.scrollY > 50) {
-    navbar.classList.add('scrolled');
-  } else {
-    navbar.classList.remove('scrolled');
-  }
+  document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 40);
 });
 
-// SCROLL TO SECTION
-function scrollToSection(id) {
+// Smooth scroll
+function goto(id) {
   const el = document.getElementById(id);
   if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
-function scrollToTop() {
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-}
 
-// SEARCH TABS
-function setTab(btn, type) {
+// Search tabs
+function setTab(btn) {
   document.querySelectorAll('.search-tab').forEach(t => t.classList.remove('active'));
   btn.classList.add('active');
 }
 
-// FAQ TOGGLE
-function toggleFaq(questionEl) {
-  const item = questionEl.parentElement;
+// FAQ toggle
+function toggleFaq(qEl) {
+  const item = qEl.closest('.faq-item');
   const isOpen = item.classList.contains('open');
   document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
   if (!isOpen) item.classList.add('open');
 }
 
-// SCROLL ANIMATIONS
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('visible');
-    }
-  });
-}, { threshold: 0.15 });
-document.querySelectorAll('.animate-in').forEach(el => observer.observe(el));
-
-// PROPERTY SAVE TOGGLE
-document.querySelectorAll('.property-save').forEach(btn => {
-  btn.addEventListener('click', (e) => {
-    e.stopPropagation();
-    btn.textContent = btn.textContent === '♡' ? '♥' : '♡';
-    btn.style.color = btn.textContent === '♥' ? '#ef4444' : '';
-  });
-});
-
-// POPULAR TAGS CLICK
-document.querySelectorAll('.popular-tag').forEach(tag => {
-  tag.addEventListener('click', () => {
-    document.querySelectorAll('.popular-tag').forEach(t => t.style.background = '');
-    tag.style.background = 'rgba(46,196,182,0.15)';
-    tag.style.borderColor = 'var(--teal)';
-    tag.style.color = 'var(--teal-dark)';
-  });
-});
-
-// SMOOTH HERO ENTRANCE
-window.addEventListener('load', () => {
-  document.querySelectorAll('.animate-in').forEach((el, i) => {
-    setTimeout(() => {
-      el.classList.add('visible');
-    }, i * 120);
-  });
-});
-
-// NUMBER COUNTER ANIMATION
-function animateCounter(el, target, suffix = '') {
-  let current = 0;
-  const increment = target / 60;
-  const timer = setInterval(() => {
-    current += increment;
-    if (current >= target) {
-      current = target;
-      clearInterval(timer);
-    }
-    el.textContent = Math.floor(current).toLocaleString('he-IL') + suffix;
-  }, 25);
+// Save property toggle
+function toggleSave(btn) {
+  const saved = btn.textContent === '♥';
+  btn.textContent = saved ? '♡' : '♥';
+  btn.style.color = saved ? '' : '#ef4444';
 }
-const statObserver = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      const nums = entry.target.querySelectorAll('.stat-num-big');
-      nums.forEach(num => {
-        const text = num.textContent;
-        if (text.includes('12K')) animateCounter(num, 12, 'K+');
-        else if (text.includes('98')) animateCounter(num, 98, '%');
-        else if (text.includes('500')) animateCounter(num, 500, '+');
-      });
-      statObserver.unobserve(entry.target);
-    }
+
+// Fade in on scroll
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('show'); io.unobserve(e.target); } });
+}, { threshold: 0.12 });
+document.querySelectorAll('.fade').forEach(el => io.observe(el));
+
+// Instantly show hero fades on load
+window.addEventListener('load', () => {
+  document.querySelectorAll('.hero .fade, .search-bar-box.fade').forEach(el => {
+    setTimeout(() => el.classList.add('show'), 200);
   });
-}, { threshold: 0.5 });
-const statsSection = document.querySelector('.stats-section');
-if (statsSection) statObserver.observe(statsSection);
+});
+
+// Popular search hints
+document.querySelectorAll('.search-hint').forEach(h => {
+  h.addEventListener('click', () => {
+    document.querySelectorAll('.search-hint').forEach(x => {
+      x.style.borderColor = ''; x.style.color = ''; x.style.background = '';
+    });
+    h.style.borderColor = 'var(--teal)';
+    h.style.color = 'var(--teal2)';
+    h.style.background = 'rgba(0,191,165,.06)';
+  });
+});
 </script>
 </body>
 </html>
